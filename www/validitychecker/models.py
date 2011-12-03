@@ -20,7 +20,7 @@ class Article(models.Model):
     data_type = models.ForeignKey('Datatype')
     times_cited_on_isi = models.IntegerField(blank=True)
 
-    last_updated = models.DateField(auto_now=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return u'%s' % self.title
@@ -32,8 +32,8 @@ class Language(models.Model):
 class Datatype(models.Model):
     name = models.CharField(max_length=30)
 
-class Query(mdoels.Model):
+class Query(models.Model):
     query = models.CharField(max_length=255)
-    count = models.IntegerField()
+    number = models.IntegerField()
 
-    last_updated = models.DateField(auto_now=True)
+    last_updated = models.DateTimeField(auto_now=True)
