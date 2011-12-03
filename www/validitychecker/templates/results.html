@@ -1,4 +1,23 @@
 {% extends "base.html" %}
+
 {% block content %}
-Your search for '{{ term }}' provided no results.  Try again later.
+<form method="get" action="{{ target }}">
+  <input name="q" value="{{ term }}"/>
+  <input type="submit" value="Search" />
+</form>
+<ul id="results">
+{% for result in results %}
+    <li>
+        <div class="author-info">
+            <h2 class="author-name">Hans Müller</h2>
+            <p class="author-meta">University of Potsdam &bull; 5000 articles published</p>
+        </div>
+        <ul class="articles">
+            <li><a href="http://google.com">Article #1</a></li>
+            <li><a href="http://google.com">Article #1</a></li>
+            <li><a href="http://google.com">Article #1</a></li>
+        </ul>
+    </li>
+{% endfor %}
+</ul>
 {% endblock %}
