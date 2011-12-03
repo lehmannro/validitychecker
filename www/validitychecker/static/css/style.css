@@ -221,9 +221,12 @@ h1 a {
     background-repeat: no-repeat; 
     text-align: left; 
     direction: ltr;
-    background: url(../images/logo.png);
+    background: url(../images/logo.svg) no-repeat;
     width: 114px;
     height: 65px;
+}
+.no-svg h1 a {
+    background: url(../images/logo.png) no-repeat;
 }
 
 .home .sell, .home form {
@@ -234,7 +237,11 @@ h1 a {
     margin-top: 3em;
 }
 
-.home .sell strong {
+.home .sell p {
+    display: none;
+}
+
+.home .sell h2 {
     font-family: ChunkFiveRegular;
     font-weight: normal;
     font-size: 2em;
@@ -309,8 +316,34 @@ h1 a {
    Modify as content requires.
    ========================================================================== */
 
+@media only screen and (max-width: 480px) {
+
+.home form {
+    position: relative;
+    height: 3em;
+}
+.home form input[type=search] {
+    position: absolute;
+    left: 0;
+    right: 50px;
+    top: 0;
+}
+.home form input[type=submit] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+}
+
+}
+
+
 @media only screen and (min-width: 480px) {
   /* Style adjustments for viewports 480px and over go here */
+
+.home .sell p {
+    display: block;
+}
 
 }
 
@@ -320,10 +353,11 @@ h1 a {
 #container {
     width: 54em;
     margin: 3em auto;
+    padding: 3em;
 }
 
 .home .sell, .home form {
-    margin: 1em 0 1em 7.5em;
+    margin: 3em 6em 2em 7.5em;
 }
 
 .home form input[type=search] {
