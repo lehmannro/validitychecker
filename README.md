@@ -2,6 +2,26 @@ Climate Goggles
 ===============
 -- protect your brain from climate fiction
 
+## How to use
+### Dependencies
+* [Python 2.7](http://python.org/)
+* [Django](https://www.djangoproject.com/)
+* [Beautiful soup](http://www.crummy.com/software/BeautifulSoup/)
+* [lxml](http://lxml.de/)
+
+
+### Installation
+Just in case you have no idea how to get going here are the required commands for Ubuntu:
+    
+    git clone git@github.com:lehmannro/validitychecker.git
+    sudo apt-get install python python-pip python-dev
+    sudo pip install django
+    sudo pip install beautifulsoup
+    sudo pip install lxml
+    cd validitychecker/www/
+    python manage.py syncdb --noinput
+    python manage.py runserver
+
 
 ## Problem
 * It is difficult for normal people to classify the background of scientific statements and what is serious. 
