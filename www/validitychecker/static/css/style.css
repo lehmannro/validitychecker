@@ -284,10 +284,22 @@ h1 a {
     overflow: hidden;
 }
 
-#popular li{
-    margin: 6px 4px;
-    padding: 2px;
+#popular {
+    text-align: center;
 }
+
+#popular li a{
+    display: inline-block;
+    margin: 2px 4px !important;
+    padding-bottom: 2px !important;
+    text-decoration: none !important;
+}
+
+#popular li a:hover {
+    border-bottom: 2px dashed;
+    padding-bottom: 0px !important;
+}
+
 
 /* =============================================================================
    Non-semantic helper classes
