@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block body_classes %}class="results"{% endblock %}
+
 {% block content %}
 <form method="get" action="{{ target }}">
   <input name="q" value="{{ query }}"/>

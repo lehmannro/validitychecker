@@ -2,10 +2,18 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from datetime import date
+from validitychecker.models import Query
+from django.db.models import F
 
 def results(request):
     if 'q' in request.GET:
         query = request.GET['q']
+
+        #save query to db
+        qobj, created = Query.objects.get_or_create(query=query, defaults={'query':query, 'number':0})
+        qobj.number = F('number') + 1
+        qobj.save()
+
         resultset = get_results(query)
         return render_to_response('results.html',
                                   context_instance=RequestContext(request, dict(
@@ -35,6 +43,9 @@ def get_results(query):
                 MockArticle("Lord of the Rings")])]
 
 def index(request):
+
+    popular_queries = Query.objects.order_by('number')[:5]
     return render_to_response('home.html',
+                              { 'popular_queries': popular_queries },
                               context_instance=RequestContext(request, dict(
                               target=reverse(results))))
