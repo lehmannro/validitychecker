@@ -54,36 +54,14 @@ def get_authors_and_articles_from_db(titles):
     returns the matching articles and authors from the db 
     param: title a list of strings    
     """
-    authors = Author.objects.filter(articles__title__in=titles).distinct()
+    authors = Author.objects.filter(articles__title__in=titles).distinct()[0:10]
     ret = [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name).order_by('-publish_date')) for author in authors]
     #ret = Article.objects.filter(title__in=titles).values('author')
     #ret = Author.objects.filter(articles__title__in=titles).
     #print ret
     return ret
 
-class MockAuthor(object):
-    def __init__(self, name, score):
-        self.first_name, self.last_name = name.rsplit(" ", 1)
-        self.articles = self
-        self.count = 100
-        self.isi_score = score
-class MockArticle(object):
-    def __init__(self, title):
-        self.title = title
-        self.url = "http://google.com/"
-        self.publish_date = date.today()
-
-def get_fake_results(query):
-    return [
-            (MockAuthor("Al Gore", 100), [
-                MockArticle("An Inconvenient Truth"),
-                MockArticle("Our Choice")]),
-            (MockAuthor("J R R Tolkien", 40), [
-                MockArticle("Little Hobbit"),
-                MockArticle("Lord of the Rings")])]
-
 def index(request):
-
     popular_queries = Query.objects.order_by('-number')[:5]
     for q in popular_queries:
         q.url = urllib.quote_plus(q.query)

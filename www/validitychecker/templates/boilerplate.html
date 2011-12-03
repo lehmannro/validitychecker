@@ -38,6 +38,7 @@
   {% block css %}
   {# CSS: implied media="all" #}
   <link rel="stylesheet" href="{{STATIC_URL}}css/style.css" >
+  <link rel="stylesheet" href="{{STATIC_URL}}css/fontface/fontface.css" >
   {% endblock %}
   {% block extra_css %}{% endblock %}
 
@@ -59,6 +60,8 @@
 
 {% block body %}
 <body {% block body_classes %}{% endblock %}>
+
+  <div class="mask"></div>
 
   {% block container %}
   <div id="container">
@@ -87,13 +90,15 @@
   </div> {# end of #container #}
   {% endblock %}
 
-
+ 
   {% block js %}
+   <script src="{{STATIC_URL}}js/libs/jquery-1.6.1.min.js"></script>
+
   {# JavaScript at the bottom for fast page loading #}
   {# Javascript files are all concatenacted and compressed #}
   {# to update for production use python manage generatemedia #}
   <!--[if lt IE 8]><script src="{{STATIC_URL}}js/main-ie.js"></script><![endif]-->
-  <!--[if (!IE)|(gte IE 8)]><!--> <script src="{{STATIC_URL}}js/main.js"></script> <!--<![endif]-->
+  <!--[if (!IE)|(gte IE 8)]><!--> <script src="{{STATIC_URL}}js/script.js"></script> <!--<![endif]-->
   {% endblock %}
   {% block extra_js %}{% endblock %}
 
