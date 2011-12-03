@@ -6,6 +6,7 @@
 // @include         http://scholar.google.com/scholar*
 // @include         http://scholar.google.de/scholar*
 // @resource        service http://localhost:8000/score
+// @run-at          document-end
 // ==/UserScript==
 
 function getScore(author, title, callback) {
