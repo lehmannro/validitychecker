@@ -12,7 +12,7 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     abstract = models.TextField()
     publish_date = models.DateField('date published')
-    source = models.CharField(blank=True)
+    source = models.CharField(max_length=2048, blank=True)
     language = models.ForeignKey('Language')
     data_type = models.ForeignKey('Datatype')
 

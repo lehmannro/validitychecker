@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+{% block body_classes %}class="home"{% endblock %}
+
 {% block content %}
 
-<div>
+<div class="sell">
     <p>With so many people talking about climate change it can be hard to separate fact from fiction.</p>
     <p>Climate Goggles help you to find the truth from the world's most respected scientists.</p>
 </div>
@@ -20,10 +22,8 @@
 
 <h2>Popular searches</h2>
 <ol>
-    <li><a href="">Popular theory to test</a></li>
-    <li><a href="">Popular theory to test</a></li>
-    <li><a href="">Popular theory to test</a></li>
-    <li><a href="">Popular theory to test</a></li>
-    <li><a href="">Popular theory to test</a></li>
+    {% for query in popular_query %}
+    <li><a href="{{ target }}?q={{ query.query }}">{{ query.query }}</a></li>
+    {% endfor %}
 </ol>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block body_classes %}class="results"{% endblock %}
+
 {% block content %}
 <form method="get" action="{{ target }}">
   <input name="q" value="{{ query }}"/>
@@ -14,7 +16,7 @@
         </div>
         <ul class="articles">
             {% for article in articles %}
-            <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+            <li><a href="{{ article.url }}">{{ article.title }} &bull; {{ article.publish_date|date:"m/d/Y" }}</a></li>
             {% endfor %}
         </ul>
     </li>
