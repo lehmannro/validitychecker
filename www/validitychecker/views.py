@@ -4,7 +4,10 @@ from django.template import RequestContext
 from validitychecker.models import Query, Article, Author
 from datetime import date
 from django.db.models import F
+<<<<<<< HEAD
 from validitychecker.helpers import parsers
+=======
+>>>>>>> parent of 7d11ae8... added google scholar parser
 
 def results(request):
     if 'q' in request.GET:
@@ -16,7 +19,11 @@ def results(request):
         qobj.save()
 
         #query google scholar
+<<<<<<< HEAD
         titles = [x[0] for x in parsers.google_scholar_parser(query)]
+=======
+        #how?
+>>>>>>> parent of 7d11ae8... added google scholar parser
 
         resultset = get_results(titles)
         return render_to_response('results.html',
