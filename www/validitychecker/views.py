@@ -20,10 +20,16 @@ def results(request):
         googleScholar = parsers.google_scholar_parser(query)
 
         #write to db
-        englishLang, created = Language.objects.get_or_create(code='EN', defaults={'code':'EN', 'name':'English'})
         articleType, created = Datatype.objects.get_or_create(name='article', defaults={'name':'article'})
         for entry in googleScholar:
-            article, created = Article.objects.get_or_create(title=entry['title'], defaults={'url':entry['url'], 'publish_date':entry['publish_date'],'title':entry['title'], 'language':englishLang, 'data_type':articleType})
+            article, created = Article.objects.get_or_create(
+                title=entry['title'],
+                defaults={
+                    'url':entry['url'], 
+                    'publish_date':entry['publish_date'],
+                    'title':entry['title'], 
+                    'data_type':articleType
+                })
             for authorName in entry['authors']:
                 author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
                 author.articles.add(article)
