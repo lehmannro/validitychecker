@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from xml.etree.ElementTree import fromstring
+from lxml.html.soupparser import fromstring
 import urllib, urllib2
 
 def google_scholar_parser (query):
