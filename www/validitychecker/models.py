@@ -14,6 +14,9 @@ class Article(models.Model):
     publish_date = models.DateField('date published')
     language = models.ForeignKey('Language')
     data_type = models.ForeignKey('Datatype')
+
+    url = models.CharField(max_length=255)
+
     times_cited_on_isi = models.IntegerField(blank=True)
 
     last_updated = models.DateTimeField(auto_now=True)
