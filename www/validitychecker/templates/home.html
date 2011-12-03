@@ -4,27 +4,28 @@
 {% block body_classes %}class="home"{% endblock %}
 
 {% block content %}
+<div class="content">
+    <div class="sell">
+        <h2>{% trans "Protect your brain from climate fiction." %}</h2>
+        <p>{% trans "With so many people talking about climate change it can be hard to separate fact from fiction." %}</p>
+        <p>{% trans "Climate Goggles help you to find the truth from the world's most respected scientists." %}</p>
+    </div>
 
-<div class="sell">
-    <p><strong>{% trans "Protect your brain from climate fiction." %}</strong></p>
-    <p>{% trans "With so many people talking about climate change it can be hard to separate fact from fiction." %}</p>
-    <p>{% trans "Climate Goggles help you to find the truth from the world's most respected scientists." %}</p>
+    <form method="get" action="{{ target }}">
+        <fieldset>
+            <label for="q">
+                <span class="visuallyhidden">{% trans "Climate science theory" %}</span>
+                <input id="q" name="q" required autofocus placeholder="{% trans "Climate science theory" %}" type="search" />
+            </label>
+            <input type="submit" value="{% trans "Search" %}" />
+        </fieldset>
+    </form>
+
+    <h2>{% trans "Popular searches" %}</h2>
+    <ul class="popular">
+        {% for query in popular_queries %}
+        <li value="{{ query.number}}"><a href="{{ target }}?q={{ query.url }}">{{ query.query }}</a></li>
+        {% endfor %}
+    </ul>
 </div>
-
-<form method="get" action="{{ target }}">
-    <fieldset>
-        <label for="q">
-            <span class="visuallyhidden">{% trans "Climate science theory" %}</span>
-            <input id="q" name="q" required autofocus placeholder="{% trans "Climate science theory" %}" type="search" />
-        </label>
-        <input type="submit" value="{% trans "Search" %}" />
-    </fieldset>
-</form>
-
-<h2>{% trans "Popular searches" %}</h2>
-<ul id="popular">
-    {% for query in popular_queries %}
-    <li value="{{ query.number}}"><a href="{{ target }}?q={{ query.url }}">{{ query.query }}</a></li>
-    {% endfor %}
-</ul>
 {% endblock %}
