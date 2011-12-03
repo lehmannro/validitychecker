@@ -14,6 +14,9 @@ def results(request):
         qobj.number = F('number') + 1
         qobj.save()
 
+        #query google scholar
+        #how?
+
         resultset = get_fake_results(query)
         return render_to_response('results.html',
                                   context_instance=RequestContext(request, dict(
