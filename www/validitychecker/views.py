@@ -17,8 +17,25 @@ def results(request):
     else:
         return # 300 /index
 
+class MockAuthor(object):
+    def __init__(self, name, score):
+        self.first_name, self.last_name = name.rsplit(" ", 1)
+        self.articles = self
+        self.count = 100
+        self.isi_score = score
+class MockArticle(object):
+    def __init__(self, title):
+        self.title = title
+        self.url = "http://google.com/"
+
 def get_results(query):
-    return ["%s 1" % query, "%s 2" % query]
+    return [
+            (MockAuthor("Al Gore", 100), [
+                MockArticle("An Inconvenient Truth"),
+                MockArticle("Our Choice")]),
+            (MockAuthor("J R R Tolkien", 40), [
+                MockArticle("Little Hobbit"),
+                MockArticle("Lord of the Rings")])]
 
 def index(request):
     return render_to_response('home.html',
