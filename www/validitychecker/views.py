@@ -23,9 +23,10 @@ def results(request):
         englishLang, created = Language.objects.get_or_create(code='EN', defaults={'code':'EN', 'name':'English'})
         articleType, created = Datatype.objects.get_or_create(name='article', defaults={'name':'article'})
         for entry in googleScholar:
-            article, created = Article.objects.get_or_create(title=entry[0], defaults={'title':entry[0], 'url':'www.rhok.org', 'publish_date':date.today(), 'language':englishLang, 'data_type':articleType})
-            author, created = Author.objects.get_or_create(name=entry[1], defaults={'name':entry[1]})
-            author.articles.add(article)
+            article, created = Article.objects.get_or_create(title=entry['title'], defaults={'url':entry['url'], 'publish_date':entry['publish_date'],'title':entry['title'], 'language':englishLang, 'data_type':articleType})
+            for authorName in entry['authors']:
+                author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
+                author.articles.add(article)
 
         titles = [x[0] for x in googleScholar]
 
