@@ -1,3 +1,5 @@
+@import url('fontface/fontface.css');
+ 
 /*
  * HTML5 ✰ Boilerplate
  *
@@ -187,9 +189,17 @@ table { border-collapse: collapse; border-spacing: 0; }
    Author: 
    ========================================================================== */
 
+#container {
+    width: 73.846153846em;
+    margin: auto;
+}
 
-
-
+h1 {
+    font-family: ChunkFiveRegular;
+    font-weight: normal;
+    font-size: 6em;
+    text-align: center;
+}
 
 
 

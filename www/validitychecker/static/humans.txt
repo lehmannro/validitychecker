@@ -3,10 +3,10 @@
 
 
 /* TEAM */
-  <your title>: <your name>
-  Site: 
-  Twitter: 
-  Location: 
+  David Owens: UX developer
+  Site: http://fineartdavid.com
+  Twitter: fineartdavid
+  Location: Berlin
 
 /* THANKS */
   Names (& URL): 
