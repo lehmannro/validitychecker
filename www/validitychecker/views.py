@@ -16,9 +16,10 @@ def results(request):
         qobj.save()
 
         #query google scholar
-		titles = [x[0] for x in parsers.google_scholar_parser(query)]
+        #titles = [x[0] for x in parsers.google_scholar_parser(query)]
 
-        resultset = get_results(titles)
+        #resultset = get_results(titles)
+        resultset = get_fake_results(query)
         return render_to_response('results.html',
                                   context_instance=RequestContext(request, dict(
                                   results=resultset, query=query)))
