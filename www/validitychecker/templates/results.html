@@ -2,22 +2,23 @@
 
 {% block content %}
 <form method="get" action="{{ target }}">
-  <input name="q" value="{{ term }}"/>
+  <input name="q" value="{{ query }}"/>
   <input type="submit" value="Search" />
 </form>
 <ul id="results">
-{% for result in results %}
+    {% for result in results %}
     <li>
         <div class="author-info">
-            <h2 class="author-name">Hans Müller</h2>
-            <p class="author-meta">University of Potsdam &bull; 5000 articles published</p>
+            <h2 class="author-name">{{ result[0].first_name }} {{ result[0].last_name }}</h2>
+            <p class="author-meta">ISI Score: {{ result[0].isi_score }} &bull; {{ result[0].articles.count }} articles published</p>
         </div>
         <ul class="articles">
-            <li><a href="http://google.com">Article #1</a></li>
-            <li><a href="http://google.com">Article #1</a></li>
-            <li><a href="http://google.com">Article #1</a></li>
+            {% for article in result[1] %}
+            <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+            {% endfor %}
         </ul>
     </li>
-{% endfor %}
+    {% endfor %}
 </ul>
+
 {% endblock %}
