@@ -6,17 +6,14 @@
 {% block content %}
 
 <div class="sell">
+    <p><strong>{% trans "Protect your brain from climate fiction." %}</strong></p>
     <p>{% trans "With so many people talking about climate change it can be hard to separate fact from fiction." %}</p>
     <p>{% trans "Climate Goggles help you to find the truth from the world's most respected scientists." %}</p>
 </div>
 
 <form method="get" action="{{ target }}">
     <fieldset>
-        <legend>{% trans "Check a theory" %}</legend>
-        <label for="q">
-            <span>{% trans "Climate science theory" %}</span>
-            <input name="q" required autofocus/>
-        </label>
+        <input name="q" required autofocus placeholder="{% trans "Climate science theory" %}" type="search" />
         <input type="submit" value="{% trans "Search" %}" />
     </fieldset>
 </form>
