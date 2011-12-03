@@ -5,14 +5,15 @@
 // @include         http://scholar.google.tld/scholar*
 // @include         http://scholar.google.com/scholar*
 // @include         http://scholar.google.de/scholar*
-// @resource        service http://localhost:8000/score
 // @run-at          document-end
 // ==/UserScript==
+
+SERVICE = "http://localhost:8000/score"
 
 function getScore(author, title, callback) {
     GM_xmlhttpRequest({
         method: "POST",
-        url: GM_getResourceText("service"),
+        url: SERVICE,
         data: "author=" + escape(author) + "&title=" + escape(title),
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
