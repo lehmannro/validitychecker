@@ -24,14 +24,21 @@ def results(request):
         googleScholar = parsers.google_scholar_parser(query)
 
         #write to db
-        englishLang, created = Language.objects.get_or_create(code='EN', defaults={'code':'EN', 'name':'English'})
         articleType, created = Datatype.objects.get_or_create(name='article', defaults={'name':'article'})
         for entry in googleScholar:
-            article, created = Article.objects.get_or_create(title=entry[0], defaults={'title':entry[0], 'url':'www.rhok.org', 'publish_date':date.today(), 'language':englishLang, 'data_type':articleType})
-            author, created = Author.objects.get_or_create(name=entry[1], defaults={'name':entry[1]})
-            author.articles.add(article)
+            article, created = Article.objects.get_or_create(
+                title=entry['title'],
+                defaults={
+                    'url':entry['url'], 
+                    'publish_date':entry['publish_date'],
+                    'title':entry['title'], 
+                    'data_type':articleType
+                })
+            for authorName in entry['authors']:
+                author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
+                author.articles.add(article)
 
-        titles = [x[0] for x in googleScholar]
+        titles = [x['title'] for x in googleScholar]
 
         resultset = get_authors_and_articles_from_db(titles)
         #resultset = get_fake_results(query)
@@ -47,8 +54,12 @@ def get_authors_and_articles_from_db(titles):
     returns the matching articles and authors from the db 
     param: title a list of strings    
     """
-    authors = Author.objects.filter(articles__title__in=titles)
-    return [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name)) for author in authors]
+    authors = Author.objects.filter(articles__title__in=titles).distinct()
+    ret = [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name).order_by('-publish_date')) for author in authors]
+    #ret = Article.objects.filter(title__in=titles).values('author')
+    #ret = Author.objects.filter(articles__title__in=titles).
+    #print ret
+    return ret
 
 class MockAuthor(object):
     def __init__(self, name, score):
