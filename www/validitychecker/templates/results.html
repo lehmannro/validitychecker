@@ -1,12 +1,24 @@
 {% extends "base.html" %}
+
 {% block content %}
-{% if results %}
-<ul>
-  {% for result in results %}
-    <li>{{ result }}</li>
-  {% endfor %}
+<form method="get" action="{{ target }}">
+  <input name="q" value="{{ query }}"/>
+  <input type="submit" value="Search" />
+</form>
+<ul id="results">
+    {% for result in results %}
+    <li>
+        <div class="author-info">
+            <h2 class="author-name">{{ result[0].first_name }} {{ result[0].last_name }}</h2>
+            <p class="author-meta">ISI Score: {{ result[0].isi_score }} &bull; {{ result[0].articles.count }} articles published</p>
+        </div>
+        <ul class="articles">
+            {% for article in result[1] %}
+            <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
 </ul>
-{% else %}
-Your search for '{{ query }}' provided no results.  Try again later.
-{% endif %}
+
 {% endblock %}
