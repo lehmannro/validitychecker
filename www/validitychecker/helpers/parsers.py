@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from lxml.html.soupparser import fromstring
+from BeautifulSoup import fromstring
 import urllib, urllib2
 
 def google_scholar_parser (query):
