@@ -1,8 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<div>
+    <p>With so many people talking about climate change it can be hard to separate fact from fiction.</p>
+    <p>Climate Goggles help you to find the truth from the world's most respected scientists.</p>
+</div>
+
 <form method="get" action="{{ target }}">
-  <input name="q" />
-  <input type="submit" value="Search" />
+    <fieldset>
+        <legend>Check a theory</legend>
+        <label for="q">
+            <span>Climate science theory</span>
+            <input name="q" required autofocus/>
+        </label>
+        <input type="submit" value="Search" />
+    </fieldset>
 </form>
+
+<h2>Popular searches</h2>
+<ol>
+    <li><a href="">Popular theory to test</a></li>
+    <li><a href="">Popular theory to test</a></li>
+    <li><a href="">Popular theory to test</a></li>
+    <li><a href="">Popular theory to test</a></li>
+    <li><a href="">Popular theory to test</a></li>
+</ol>
 {% endblock %}
