@@ -12,7 +12,7 @@
     {% for author, articles in results %}
     <li>
         <div class="author-info">
-            <h2 class="author-name">{{ author.first_name }} {{ author.last_name }}</h2>
+            <h2 class="author-name">{{ author.name }}</h2>
             <p class="author-meta">
             {% blocktrans with score=author.isi_score %}ISI Score: {{ score }}{% endblocktrans %}
             &bull;
