@@ -4,6 +4,7 @@ from django.template import RequestContext
 from validitychecker.models import Query, Article, Author
 from datetime import date
 from django.db.models import F
+from GoogleScholarParser import search_google_scholar
 
 def results(request):
     if 'q' in request.GET:
@@ -15,7 +16,7 @@ def results(request):
         qobj.save()
 
         #query google scholar
-        #how?
+        #search_google_scholar(query)
 
         resultset = get_fake_results(query)
         return render_to_response('results.html',
