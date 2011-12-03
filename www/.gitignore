@@ -1,3 +1,4 @@
+_static/
 database.sqlite
 venv
 .pyc
