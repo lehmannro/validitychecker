@@ -16,7 +16,7 @@
 {% block navigation %}
 <nav>
 <ul>
-<li><a href='{% url www.validitychecker.views.index %}'>Home</a></li>
+<li><a href='{% url home %}'>Home</a></li>
 </ul>
 </hav>
 {% endblock %}
