@@ -1,22 +1,26 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block body_classes %}class="results"{% endblock %}
 
 {% block content %}
 <form method="get" action="{{ target }}">
   <input name="q" value="{{ query }}"/>
-  <input type="submit" value="Search" />
+  <input type="submit" value="{% trans "Search" %}" />
 </form>
 <ul id="results">
     {% for author, articles in results %}
     <li>
         <div class="author-info">
-            <h2 class="author-name">{{ author.first_name }} {{ author.last_name }}</h2>
-            <p class="author-meta">ISI Score: {{ author.isi_score }} &bull; {{ author.articles.count }} articles published</p>
+            <h2 class="author-name">{{ author.name }}</h2>
+            <p class="author-meta">
+            {% blocktrans with score=author.isi_score %}ISI Score: {{ score }}{% endblocktrans %}
+            &bull;
+            {% blocktrans with count=author.articles.count %}{{ count }} articles published{% endblocktrans %}</p>
         </div>
         <ul class="articles">
             {% for article in articles %}
-            <li><a href="{{ article.url }}">{{ article.title }} &bull; {{ article.publish_date|date:"m/d/Y" }}</a></li>
+            <li><a href="{{ article.url }}">{{ article.title }} &bull; {{ article.publish_date|date:_("M Y") }}</a></li>
             {% endfor %}
         </ul>
     </li>
