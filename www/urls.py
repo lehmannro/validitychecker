@@ -7,6 +7,7 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'www.validitychecker.views.index'),
+    url(r'^search/$', 'www.validitychecker.views.results'),
     # url(r'^www/', include('www.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

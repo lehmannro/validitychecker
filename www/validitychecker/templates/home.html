@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form>
-  <input></input>
+<form method="get" action="{{ target }}">
+  <input name="q" />
+  <input type="submit" value="Search" />
 </form>
 {% endblock %}

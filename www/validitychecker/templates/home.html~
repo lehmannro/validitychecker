@@ -1,7 +1,14 @@
-{% extends 'boilerplate.html' %}
+<<<<<<< HEAD
+{% extends 'base.html' %}
 
 {% block content %}
 <form>
   <input></input>
+=======
+{% block body %}
+<form method="get" action="{{ target }}">
+  <input name="q" />
+  <input type="submit" value="Search" />
+>>>>>>> 6b3ebfda60d8c27c499cb987059cda4d26771934
 </form>
 {% endblock %}
