@@ -93,9 +93,17 @@ class IsiHandler():
 			text = regexSuite['highlite'].sub(innertext,text,1)
 		return text
 
+	def getNumberOfRecords(self):
+		pagereverse = tostring(self.page)[::-1]
+		match = re.search('([0-9]*?)_DROCER', pagereverse)			#search for last record
+		if match != None:
+			return int(match.group(1)[::-1])
+		else:
+			return -1		
+
 	def parsePage(self):
 		erg = []
-		for i in range (1,int(standardPostData['rs_rec_per_page'])+1):
+		for i in range (1,self.getNumberOfRecords()+1):
 			ergdic = {'author':'', 'title':'', 'source':'', 'timescited': 0}
 			text = tostring(self.page.get_element_by_id('RECORD_%s'% str(i)))
 			text = self.replaceAllHighlites(text)
