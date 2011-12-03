@@ -7,7 +7,7 @@ $(document).ready(function() {
         //$('.mask').show();
     });
 
-    $("#popular").tagcloud({type:"list",sizemin:18, sizemax:38, colormin:"1e90ff",colormax:"00008b"}).find("li");
+    $("#popular").tagcloud({type:"list",sizemin:16, sizemax:30, colormin:"aaa",colormax:"888"}).find("li");
 });
 
 

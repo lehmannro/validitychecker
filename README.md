@@ -8,13 +8,14 @@ Climate Goggles
 * [Django](https://www.djangoproject.com/)
 * [Beautiful soup](http://www.crummy.com/software/BeautifulSoup/)
 * [lxml](http://lxml.de/)
+* [SQLite](http://www.sqlite.org/)
 
 
 ### Installation
 Just in case you have no idea how to get going here are the required commands for Ubuntu:
     
     git clone git@github.com:lehmannro/validitychecker.git
-    sudo apt-get install python python-pip python-dev
+    sudo apt-get install python python-pip python-dev sqlite3
     sudo pip install django
     sudo pip install beautifulsoup
     sudo pip install lxml
