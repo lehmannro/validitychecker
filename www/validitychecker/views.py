@@ -44,7 +44,7 @@ def get_results(query):
 
 def index(request):
 
-    popular_queries = Query.objects.order_by('number')[:5]
+    popular_queries = Query.objects.order_by('-number')[:5]
     return render_to_response('home.html',
                               { 'popular_queries': popular_queries },
                               context_instance=RequestContext(request, dict(
