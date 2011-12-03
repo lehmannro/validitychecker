@@ -1,10 +1,14 @@
 from django.core.urlresolvers import reverse
+from django.db.models import F
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from validitychecker.models import Query, Article, Author, Language, Datatype
+from django.views.decorators.csrf import csrf_exempt
+
 from datetime import date
-from django.db.models import F
 import urllib
+
+from validitychecker.models import Query, Article, Author, Language, Datatype
 from validitychecker.helpers import parsers
 
 def results(request):
@@ -60,9 +64,16 @@ def get_authors_and_articles_from_db(titles):
 def index(request):
     popular_queries = Query.objects.order_by('-number')[:5]
     for q in popular_queries:
-        q.url = urllib.quote_plus(q.query) 
-    
+        q.url = urllib.quote_plus(q.query)
+
     return render_to_response('home.html',
                               { 'popular_queries': popular_queries },
                               context_instance=RequestContext(request, dict(
                               target=reverse(results))))
+
+@csrf_exempt
+def get_score(request):
+    title = request.POST.get('title')
+    author = request.POST.get('author')
+    import random
+    return HttpResponse(str(random.randrange(100)), mimetype="text/plain")

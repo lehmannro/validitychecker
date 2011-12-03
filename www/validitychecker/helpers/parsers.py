@@ -11,10 +11,10 @@ def google_scholar_parser (query):
     results = []
     doc = fromstring(response.read())
     for elem in doc.find_class('gs_r'):
-        if elem.find_class('gs_rt')[0].find("h3/a/b") != None:
+        while elem.find_class('gs_rt')[0].find("h3/a/b") != None:
             elem.find_class('gs_rt')[0].find("h3/a/b").drop_tag()
         #print elem.find_class('gs_a')[0].text
-        if elem.find_class('gs_a')[0].find("b") != None:
+        while elem.find_class('gs_a')[0].find("b") != None:
             elem.find_class('gs_a')[0].find("b").drop_tag()
         #print elem.find_class('gs_a')[0].text
         res = {}
@@ -22,6 +22,9 @@ def google_scholar_parser (query):
         res['authors'] = (elem.find_class('gs_a')[0].text.split(' - ')[0].rstrip(u'\u2026 ')).split(',')
         res['publish_date'] = date(int(elem.find_class('gs_a')[0].text.split(' - ')[1].split(',')[-1]),1,1)
         res['url'] = elem.find_class('gs_rt')[0].find("h3/a").attrib['href']
+        #print elem.find("font").find_class('gs_fl')[0].find("a").text
+        res['cited'] = int(elem.find("font").find_class('gs_fl')[0].find("a").text.split(' by ')[1])
+        #print res['cited']
         results.append(res)
     return results
 
