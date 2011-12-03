@@ -6,7 +6,7 @@ from datetime import date
 def google_scholar_parser (query):
     opener = urllib2.build_opener(urllib2.HTTPHandler(debuglevel=0))
     opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-    search_path = "http://scholar.google.com/scholar?hl=en&num=25&q=" + urllib.quote_plus(query) + "&as_sdt=0%2C5&as_ylo=&as_vis=1"
+    search_path = "http://scholar.google.com/scholar?hl=en&as_sdt=1%2C5&num=25&q=" + urllib.quote_plus(query) + "&as_sdt=0%2C5&as_ylo=&as_vis=1"
     response = opener.open(search_path)
     results = []
     doc = fromstring(response.read())
