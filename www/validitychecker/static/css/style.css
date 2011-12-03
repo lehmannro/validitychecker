@@ -189,21 +189,26 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 body {
     background: url(../images/background.jpg) fixed top center no-repeat;
-    background-size: 100%;
+    background-size: 100% auto;
+}
 
+@media screen and (orientation:portrait) {
+    body {
+        background-size: auto 100%;
+    }
 }
 
 
 
+
 #container {
-    width: 56em;
-    margin: 3em auto;
+    margin: 3em 1em;
     background: #dfdfdf;
     background: rgba(255, 255, 255, .83);
     border: 1px solid #b3b3b3;
     border-color: rgba(179, 179, 179, .83);
     border-radius: 8px;
-    padding: 3em;
+    padding: 1em;
 }
 
 h1 {
@@ -222,7 +227,7 @@ h1 a {
 }
 
 .home .sell, .home form {
-    margin: 1em 6em 1em 9.5em;
+    margin: 1em;
 }
 
 .home .sell {
@@ -244,17 +249,17 @@ h1 a {
     padding: .5em;
     float: left;
     font-size: 1.3em;
+    border-radius: 0;
 }
 .home form input[type=search] {
     background: #fff;
-    width: 27em;
 }
 .home form input[type=submit] {
     background: #b3b3b3 url(../images/search.png) center no-repeat;
+    background-size: 50%;
     display: block;
     text-indent: -999em; 
     overflow: hidden; 
-    background-repeat: no-repeat; 
     text-align: left; 
     direction: ltr;
     width: 2.8em;
@@ -279,8 +284,10 @@ h1 a {
     overflow: hidden;
 }
 
-
-
+#popular li{
+    margin: 6px 4px;
+    padding: 2px;
+}
 
 /* =============================================================================
    Non-semantic helper classes
@@ -325,6 +332,28 @@ h1 a {
 
 @media only screen and (min-width: 768px) {
   /* Style adjustments for viewports 768px and over go here */
+
+#container {
+    width: 54em;
+    margin: 3em auto;
+}
+
+.home .sell, .home form {
+    margin: 1em 0 1em 7.5em;
+}
+
+.home form input[type=search] {
+    width: 27em;
+}
+
+}
+
+@media only screen and (min-width: 950px) {
+  /* Style adjustments for viewports 480px and over go here */
+ 
+ body {
+     font-size: 16px;
+ }
 
 }
 
