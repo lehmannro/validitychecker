@@ -10,7 +10,7 @@ from datetime import date
 import urllib
 
 from validitychecker.models import Query, Article, Author, Language, Datatype
-from validitychecker.helpers import parsers
+from validitychecker.helpers import parsers, IsiHandler
 
 def results(request):
     if 'q' in request.GET:
@@ -39,9 +39,12 @@ def results(request):
             for authorName in entry['authors']:
                 author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
                 author.articles.add(article)
-
+                print author.name
+                for x in author.articles.all():
+                    print x.title
+                
         titles = [x['title'] for x in googleScholar]
-
+    
         resultset = get_authors_and_articles_from_db(titles)
         #resultset = get_fake_results(query)
 
@@ -50,6 +53,11 @@ def results(request):
                                   target=reverse(results), results=resultset, query=query)))
     else:
         return # 300 /index
+
+def calcISIForUnratedAuthors():
+    for author in get_unrated_authors():
+        author.isi_score = IsiHandler.clalcISIScore(author.name, author.articles.all)
+        author.save()
 
 def get_authors_and_articles_from_db(titles):
     """ 
@@ -62,6 +70,13 @@ def get_authors_and_articles_from_db(titles):
     #ret = Author.objects.filter(articles__title__in=titles).
     #print ret
     return ret
+
+def get_unrated_authors():
+    """
+    Get all the authors that have no ISI-Score yet
+    """
+    return Author.objects.filter(isi_score==None)
+
 
 def index(request):
     popular_queries = list(Query.objects.order_by('-number')[:15])
