@@ -144,3 +144,40 @@ LOGGING = {
         },
     }
 }
+
+
+
+# Paul Irish's HTML5 Boilerplate as a Django Template
+# version 0.1 (HTML5 Boilerplate version 0.9.5)
+# --
+# by Jusin Marrington (HowlingEverett)
+# --
+
+
+_js_head_bundle = (
+    'js/libs/modernizr-2.0.min.js',
+    'js/libs/respond.js',
+)
+
+_js_main_bundle = (
+    {'filter': 'mediagenerator.filters.media_url.MediaURL'},
+    'js/libs/jquery-1.6.1.js',
+    'js/plugins.js',
+    'js/script.js',
+)
+
+HTML5_MEDIA_BUNDLES = (
+    ('style.css',
+        'css/style.css',
+    ),
+
+    ('head-ie.js',)
+        + _js_head_bundle,
+    ('main-ie.js',)
+        + _js_main_bundle,
+    ('main.js',)
+        + _js_head_bundle
+        + _js_main_bundle,
+)
+
+MEDIA_BUNDLES = HTML5_MEDIA_BUNDLES

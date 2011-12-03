@@ -1,4 +1,6 @@
-{% block body %}
+{% extends 'base.html' %}
+
+{% block content %}
 <form method="get" action="{{ target }}">
   <input name="q" />
   <input type="submit" value="Search" />

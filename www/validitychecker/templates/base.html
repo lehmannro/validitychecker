@@ -1,10 +1,30 @@
-<!doctype html>
-<html>
-<head>
-  <title>{% block title %}{% endblock %}</title>
-</head>
-<body>
-{% block body %}
+{% extends 'boilerplate.html' %}
+
+
+{% comment %}
+{% block css %}{% include_media 'base.css' %}{% endblock %}
+{% endcomment %}
+{% block extra_css %}{% endblock %}
+{% block extra_js %}{% endblock %}
+
+{% block header %}
+<header>
+<h1>Climate Goggles</h1>
+</header>
 {% endblock %}
-</body>
-</html>
+
+{% block navigation %}
+<nav>
+<ul>
+<li><a href='{% url www.validitychecker.views.index %}'>Home</a></li>
+</ul>
+</hav>
+{% endblock %}
+
+{% block footer %}
+<footer>
+<p>Site footer</p>
+</footer>
+{% endblock %}
+
+{% block content %}{% endblock %}
