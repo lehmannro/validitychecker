@@ -7,12 +7,15 @@ def google_scholar_parser (query):
     opener = urllib2.build_opener(urllib2.HTTPHandler(debuglevel=0))
     opener.addheaders = [('User-agent', 'Mozilla/5.0')]
     search_path = "http://scholar.google.com/scholar?hl=en&as_sdt=1%2C5&num=10&q=" + urllib.quote_plus(query) + "&as_sdt=0%2C5&as_ylo=&as_vis=1"
+    print search_path
     response = opener.open(search_path)
     results = []
     doc = fromstring(response.read())
+    print len(doc.find_class('gs_r'))
     for elem in doc.find_class('gs_r'):
+        print elem.find_class('gs_rt')[0].find("h3/a").text
         if elem.find_class('gs_ctc') and elem.find_class('gs_ctc')[0].text=='[BOOK]':
-            break
+            continue
         while elem.find_class('gs_rt')[0].find("h3/a/b") != None:
             elem.find_class('gs_rt')[0].find("h3/a/b").drop_tag()
         #print elem.find_class('gs_a')[0].text
