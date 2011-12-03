@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from validitychecker.models import Query, Article, Author
+from validitychecker.models import Query, Article, Author, Language, Datatype
 from datetime import date
 from django.db.models import F
 from validitychecker.helpers import parsers
@@ -16,12 +16,20 @@ def results(request):
         qobj.save()
 
         #query google scholar
-        #titles = [x[0] for x in parsers.google_scholar_parser(query)]
+        googleScholar = parsers.google_scholar_parser(query)
 
-        #results = get_authors_and_articles_from_db(titles)
-        resultset = get_fake_results(query)
+        #write to db
+        englishLang, created = Language.objects.get_or_create(code='EN', defaults={'code':'EN', 'name':'English'})
+        articleType, created = Datatype.objects.get_or_create(name='article', defaults={'name':'article'})
+        for entry in googleScholar:
+            article, created = Article.objects.get_or_create(title=entry[0], defaults={'title':entry[0], 'url':'www.rhok.org', 'publish_date':date.today(), 'language':englishLang, 'data_type':articleType})
+            author, created = Author.objects.get_or_create(name=entry[1], defaults={'name':entry[1]})
+            author.articles.add(article)
 
-        print(resultset)
+        titles = [x[0] for x in googleScholar]
+
+        resultset = get_authors_and_articles_from_db(titles)
+        #resultset = get_fake_results(query)
 
         return render_to_response('results.html',
                                   context_instance=RequestContext(request, dict(
@@ -34,7 +42,8 @@ def get_authors_and_articles_from_db(titles):
     returns the matching articles and authors from the db 
     param: title a list of strings    
     """
-    return Author.objects.filter(articles__title__in=title)
+    authors = Author.objects.filter(articles__title__in=titles)
+    return [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name)) for author in authors]
 
 class MockAuthor(object):
     def __init__(self, name, score):

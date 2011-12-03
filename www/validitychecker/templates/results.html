@@ -11,7 +11,7 @@
     {% for author, articles in results %}
     <li>
         <div class="author-info">
-            <h2 class="author-name">{{ author.first_name }} {{ author.last_name }}</h2>
+            <h2 class="author-name">{{ author.name }}</h2>
             <p class="author-meta">ISI Score: {{ author.isi_score }} &bull; {{ author.articles.count }} articles published</p>
         </div>
         <ul class="articles">
