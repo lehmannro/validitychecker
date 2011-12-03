@@ -44,8 +44,12 @@ def get_authors_and_articles_from_db(titles):
     returns the matching articles and authors from the db 
     param: title a list of strings    
     """
-    authors = Author.objects.filter(articles__title__in=titles)
-    return [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name)) for author in authors]
+    authors = Author.objects.filter(articles__title__in=titles).distinct()
+    ret = [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name)) for author in authors]
+    #ret = Article.objects.filter(title__in=titles).values('author')
+    #ret = Author.objects.filter(articles__title__in=titles).
+    #print ret
+    return ret
 
 class MockAuthor(object):
     def __init__(self, name, score):
