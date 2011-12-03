@@ -21,7 +21,7 @@ def google_scholar_parser (query):
         res['title'] = (elem.find_class('gs_rt')[0].find("h3/a").text)
         res['authors'] = (elem.find_class('gs_a')[0].text.split(' - ')[0].rstrip(u'\u2026 ')).split(',')
         res['publish_date'] = date(int(elem.find_class('gs_a')[0].text.split(' - ')[1].split(',')[-1]),1,1)
-        res['url'] = urllib.quote_plus(elem.find_class('gs_rt')[0].find("h3/a").attrib['href'])
+        res['url'] = elem.find_class('gs_rt')[0].find("h3/a").attrib['href']
         results.append(res)
     return results
 
