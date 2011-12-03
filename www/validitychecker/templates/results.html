@@ -1,4 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
-Your search for '{{ term }}' provided no results.  Try again later.
+{% if results %}
+<ul>
+  {% for result in results %}
+    <li>{{ result }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+Your search for '{{ query }}' provided no results.  Try again later.
+{% endif %}
 {% endblock %}
