@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from datetime import date
 
 def results(request):
     if 'q' in request.GET:
@@ -22,6 +23,7 @@ class MockArticle(object):
     def __init__(self, title):
         self.title = title
         self.url = "http://google.com/"
+        self.publish_date = date.today()
 
 def get_results(query):
     return [
