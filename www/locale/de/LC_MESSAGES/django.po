@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Norman Rzepka <code@normanrzepka.de>, 2011.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-03 12:47-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Norman Rzepka <code@normanrzepka.de>\n"
+"Language-Team: LANGUAGE <de@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: validitychecker/templates/home.html:9
+msgid ""
+"With so many people talking about climate change it can be hard to separate "
+"fact from fiction."
+msgstr "So viele Leute reden über den Klimawandel, sodass es manchmal schwer ist herauszufinden was wirklich stimmt und was erfunden ist."
+
+#: validitychecker/templates/home.html:10
+msgid ""
+"Climate Goggles help you to find the truth from the world's most respected "
+"scientists."
+msgstr "Climate Goggles hilft dir die Wahrheit von den weltweit renommiertesten Wissenschaftlern zu erfahren."
+
+#: validitychecker/templates/home.html:15
+msgid "Check a theory"
+msgstr "Überprüfe eine Theorie"
+
+#: validitychecker/templates/home.html:17
+msgid "Climate science theory"
+msgstr "Klimaforschungstheorie"
+
+#: validitychecker/templates/home.html:20
+#: validitychecker/templates/results.html:9
+msgid "Search"
+msgstr "Suchen"
+
+#: validitychecker/templates/home.html:24
+msgid "Popular searches"
+msgstr "Häufigste Fragen"
+
+#: validitychecker/templates/results.html:17
+#, python-format
+msgid "ISI Score: %(score)s"
+msgstr "ISI Skala: %(score)s"
+
+#: validitychecker/templates/results.html:19
+#, python-format
+msgid "%(count)s articles published"
+msgstr "%(count)s Artikel veröffentlicht"

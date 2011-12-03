@@ -7,14 +7,22 @@
   Site: http://fineartdavid.com
   Twitter: fineartdavid
   Location: Berlin
+  
+  Norman Rzepka: Frontend developer
+  Site: http://normanrzepka.de
+  Twitter: normanrz
+  Location: Potsdam
+  
+  Thomas Werkmeister: 
+  Location: Potsdam
 
 /* THANKS */
-  Names (& URL): 
+  Names (& URL): RHoK (http://rhok.org/)
 
 /* SITE */
   Standards: HTML5, CSS3
-  Components: Modernizr, jQuery
-  Software:
+  Components: Modernizr, jQuery, Django
+  Software: Python, Sqlite
   
 
                                     
