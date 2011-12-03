@@ -1,10 +1,11 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from validitychecker.models import Query, Article, Author
 from datetime import date
-from validitychecker.models import Query
 from django.db.models import F
 import urllib
+from validitychecker.helpers import parsers
 
 def results(request):
     if 'q' in request.GET:
@@ -15,12 +16,23 @@ def results(request):
         qobj.number = F('number') + 1
         qobj.save()
 
-        resultset = get_results(query)
+        #query google scholar
+        #titles = [x[0] for x in parsers.google_scholar_parser(query)]
+
+        #resultset = get_results(titles)
+        resultset = get_fake_results(query)
         return render_to_response('results.html',
                                   context_instance=RequestContext(request, dict(
                                   target=reverse(results), results=resultset, query=query)))
     else:
         return # 300 /index
+
+def get_authors_and_articles_from_db(titles):
+    """ 
+    returns the matching articles and authors from the db 
+    param: title a list of strings    
+    """
+    return Author.objects.filter(articles__title__in=title)
 
 class MockAuthor(object):
     def __init__(self, name, score):
@@ -34,7 +46,7 @@ class MockArticle(object):
         self.url = "http://google.com/"
         self.publish_date = date.today()
 
-def get_results(query):
+def get_fake_results(query):
     return [
             (MockAuthor("Al Gore", 100), [
                 MockArticle("An Inconvenient Truth"),
