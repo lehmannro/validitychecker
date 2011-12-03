@@ -51,7 +51,7 @@
   For optimal performance, use a custom Modernizr build:
   www.modernizr.com/download/
   {% endcomment %}
-  {# modernizr and respond are also only loaded in the head for IE, else they are included in main.js at the end #}
+  <script src="{{STATIC_URL}}js/libs/modernizr-2.0.min.js"></script>
   <!--[if lt IE 8]><link rel="stylesheet" href="{{STATIC_URL}}css/head-ie.css" ><![endif]-->
   {% endblock %}
   {% block extra_head %}{% endblock %}
@@ -92,7 +92,9 @@
 
  
   {% block js %}
-   <script src="{{STATIC_URL}}js/libs/jquery-1.6.1.min.js"></script>
+  <script src="{{STATIC_URL}}js/libs/jquery-1.6.1.min.js"></script>
+  <script src="{{STATIC_URL}}js/mylibs/jquery.tagcloud.min.js"></script>
+  <script src="{{STATIC_URL}}js/mylibs/jquery.textbox-focus-on-start.js"></script>
 
   {# JavaScript at the bottom for fast page loading #}
   {# Javascript files are all concatenacted and compressed #}
