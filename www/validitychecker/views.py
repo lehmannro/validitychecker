@@ -2,16 +2,13 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from validitychecker.models import Query
-from django.core.exceptions import ObjectDoesNotExist
 
 def results(request):
     if 'q' in request.GET:
         query = request.GET['q']
 
         #save query to db
-        qobj, created = Query.objects.get_or_create(query=query, defaults={'query':query, 'number':0})
-        qobj.number += 1
-        qobj.save()
+        qobj, created = Query.objects.get_or_create(query=query, defaults={'query':query, 'number':0}).update(views=F('views')+1)
 
         resultset = get_results(query)
         return render_to_response('results.html',

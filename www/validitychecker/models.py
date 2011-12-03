@@ -2,15 +2,11 @@ from django.db import models
 
 class Author(models.Model):
     articles = models.ManyToManyField('Article', verbose_name="list of articles")
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    name = models.CharField(max_length=60)
     isi_score= models.IntegerField('ISI score', blank=True)
 
-    def name(self):
-        return u'%s %s' % (self.first_name, self.last_name)
-
     def __unicode__(self):
-        return u'%s %s' % (self.first_name, self.last_name)
+        return self.name
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
