@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block body_classes %}class="home"{% endblock %}
 
 {% block content %}
 
 <div class="sell">
-    <p>With so many people talking about climate change it can be hard to separate fact from fiction.</p>
-    <p>Climate Goggles help you to find the truth from the world's most respected scientists.</p>
+    <p>{% trans "With so many people talking about climate change it can be hard to separate fact from fiction." %}</p>
+    <p>{% trans "Climate Goggles help you to find the truth from the world's most respected scientists." %}</p>
 </div>
 
 <form method="get" action="{{ target }}">
     <fieldset>
-        <legend>Check a theory</legend>
+        <legend>{% trans "Check a theory" %}</legend>
         <label for="q">
-            <span>Climate science theory</span>
+            <span>{% trans "Climate science theory" %}</span>
             <input name="q" required autofocus/>
         </label>
-        <input type="submit" value="Search" />
+        <input type="submit" value="{% trans "Search" %}" />
     </fieldset>
 </form>
 
-<h2>Popular searches</h2>
+<h2>{% trans "Popular searches" %}</h2>
 <ol>
     {% for query in popular_queries %}
-    <li><a href="{{ target }}?q={{ query.query }}">{{ query.query }} ({{ query.number}})</a></li>
+    <li><a href="{{ target }}?q={{ query.url }}">{{ query.query }} ({{ query.number}})</a></li>
     {% endfor %}
 </ol>
 {% endblock %}

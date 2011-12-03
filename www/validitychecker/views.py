@@ -4,6 +4,7 @@ from django.template import RequestContext
 from datetime import date
 from validitychecker.models import Query
 from django.db.models import F
+import urllib
 
 def results(request):
     if 'q' in request.GET:
@@ -17,7 +18,7 @@ def results(request):
         resultset = get_results(query)
         return render_to_response('results.html',
                                   context_instance=RequestContext(request, dict(
-                                  results=resultset, query=query)))
+                                  target=reverse(results), results=resultset, query=query)))
     else:
         return # 300 /index
 
@@ -45,6 +46,9 @@ def get_results(query):
 def index(request):
 
     popular_queries = Query.objects.order_by('-number')[:5]
+    for q in popular_queries:
+        q.url = urllib.quote_plus(q.query) 
+    
     return render_to_response('home.html',
                               { 'popular_queries': popular_queries },
                               context_instance=RequestContext(request, dict(
