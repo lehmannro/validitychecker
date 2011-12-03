@@ -22,9 +22,9 @@
 </form>
 
 <h2>{% trans "Popular searches" %}</h2>
-<ol>
+<ul id="popular">
     {% for query in popular_queries %}
-    <li><a href="{{ target }}?q={{ query.url }}">{{ query.query }} ({{ query.number}})</a></li>
+    <li value="{{ query.number}}"><a href="{{ target }}?q={{ query.url }}">{{ query.query }}</a></li>
     {% endfor %}
-</ol>
+</ul>
 {% endblock %}

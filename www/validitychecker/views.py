@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from random import shuffle, seed
 
 from datetime import date
 import urllib
@@ -54,7 +55,7 @@ def get_authors_and_articles_from_db(titles):
     returns the matching articles and authors from the db 
     param: title a list of strings    
     """
-    authors = Author.objects.filter(articles__title__in=titles).distinct()[0:10]
+    authors = Author.objects.filter(articles__title__in=titles).distinct()[:10]
     ret = [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name).order_by('-publish_date')) for author in authors]
     #ret = Article.objects.filter(title__in=titles).values('author')
     #ret = Author.objects.filter(articles__title__in=titles).
@@ -62,7 +63,9 @@ def get_authors_and_articles_from_db(titles):
     return ret
 
 def index(request):
-    popular_queries = Query.objects.order_by('-number')[:5]
+    popular_queries = list(Query.objects.order_by('-number')[:15])
+    seed(42)
+    shuffle(popular_queries)
     for q in popular_queries:
         q.url = urllib.quote_plus(q.query)
 
