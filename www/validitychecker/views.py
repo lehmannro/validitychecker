@@ -34,7 +34,7 @@ def results(request):
                 author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
                 author.articles.add(article)
 
-        titles = [x[0] for x in googleScholar]
+        titles = [x['title'] for x in googleScholar]
 
         resultset = get_authors_and_articles_from_db(titles)
         #resultset = get_fake_results(query)
