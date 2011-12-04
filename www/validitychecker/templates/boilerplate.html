@@ -51,7 +51,7 @@
   For optimal performance, use a custom Modernizr build:
   www.modernizr.com/download/
   {% endcomment %}
-  {# modernizr and respond are also only loaded in the head for IE, else they are included in main.js at the end #}
+  <script src="{{STATIC_URL}}js/libs/modernizr-2.0.min.js"></script>
   <!--[if lt IE 8]><link rel="stylesheet" href="{{STATIC_URL}}css/head-ie.css" ><![endif]-->
   {% endblock %}
   {% block extra_head %}{% endblock %}
