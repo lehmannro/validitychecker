@@ -11,9 +11,9 @@ def google_scholar_parser (query):
     response = opener.open(search_path)
     results = []
     doc = fromstring(response.read())
-    print len(doc.find_class('gs_r'))
+    #print len(doc.find_class('gs_r'))
     for elem in doc.find_class('gs_r'):
-        print elem.find_class('gs_rt')[0].find("h3/a").text
+        #print elem.find_class('gs_rt')[0].find("h3/a").text
         if elem.find_class('gs_ctc') and elem.find_class('gs_ctc')[0].text=='[BOOK]':
             continue
         while elem.find_class('gs_rt')[0].find("h3/a/b") != None:
@@ -23,8 +23,8 @@ def google_scholar_parser (query):
             elem.find_class('gs_a')[0].find("b").drop_tag()
         #print elem.find_class('gs_a')[0].text
         res = {}
-        res['title'] = (elem.find_class('gs_rt')[0].find("h3/a").text)
-        res['authors'] = (elem.find_class('gs_a')[0].text.split(' - ')[0].strip(u'\u2026 ,')).split(',')
+        res['title'] = elem.find_class('gs_rt')[0].find("h3/a").text.strip(' ')
+        res['authors'] = [x.strip(' ') for x in (elem.find_class('gs_a')[0].text.split(' - ')[0].strip(u'\u2026 ,')).split(',')]
         if len(elem.find_class('gs_a')[0].text.split(' - ')) >= 3:
             try:
                 res['publish_date'] = date(int(elem.find_class('gs_a')[0].text.split(' - ')[1].split(',')[-1].split('/')[-1]),1,1)
@@ -36,6 +36,15 @@ def google_scholar_parser (query):
             res['cited'] = int(elem.find("font").find_class('gs_fl')[0].find("a").text.split(' by ')[1])
         else:
             res['cited'] = 0
+
+        while elem.find("font").find("b") != None:
+            elem.find("font").find("b").drop_tag()
+        while elem.find("font").find("br") != None:
+            elem.find("font").find("br").drop_tag()
+        while elem.find("font").find("span") != None:
+            elem.find("font").find("span").drop_tree()
+        #print elem.find("font").text.strip('.')
+        res['abstract'] = elem.find("font").text.strip('. ')
         #print res['cited']
         results.append(res)
     return results

@@ -51,11 +51,11 @@ standardPostData = {'SinceLastVisit_DATE'		:'',
                     'value(hidInput3)'			:'initSource'
 }
 
-regexSuite = {'highlite': re.compile('<span class="hitHilite">(.*?)</span>'),
-                'author': re.compile('Author\(s\): </span>(.*?)<br'),
-                'source': re.compile('Source:.*?</span>(.*?)<span', re.DOTALL),
-                'title' : re.compile('<value lang_id=.*?>(.*?)</value>'),
-                'timescited': re.compile('>([0-9]*?)</a> \(from'),
+regexSuite = {'highlite': re.compile('<span class="hitHilite">(.*?)</span>',re.DOTALL),
+                'author': re.compile('Author\(s\): </span>\s*(.*?)<br',re.DOTALL),
+                'source': re.compile('Source:.*?</span>\s*(.*?)<span', re.DOTALL),
+                'title' : re.compile('<value lang_id=.*?>(.*?)</value>', re.DOTALL),
+                'timescited': re.compile('>([0-9]*?)</a> \(from', re.DOTALL),
                 'extrachars': re.compile('&#[0-9]*?;')}
 
 class IsiHandler():
@@ -110,6 +110,7 @@ class IsiHandler():
             text = tostring(self.page.get_element_by_id('RECORD_%s'% str(i)))
             text = self.replaceAllHighlites(text)
             text = regexSuite['extrachars'].sub('',text)
+            print text
             author = regexSuite['author'].search(text)
             if author != None:
                 ergdic['author']=author.group(1)
@@ -129,8 +130,12 @@ class IsiHandler():
         return len(self.ISIData)
 
 def calcISIScore(authorname, titles):
-    correctTitles = [title.rstrip(".?!") for title in titles]
-    return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
+    try:
+        correctTitles = [title.rstrip(".?!") for title in titles]
+        return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
+    except:
+        print "well, that didn't work <(','<) <(',')> (>',')>"
+        return 0
 
 def convertScholarNameToISIName(name):
     return ' '.join(name.split(' ')[::-1])
