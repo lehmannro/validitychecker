@@ -200,7 +200,7 @@ body {
 }
 
 #container {
-    margin: 3em 1em 0;
+    margin: 1em;
     background: #dfdfdf;
     background: rgba(255, 255, 255, .83);
     border: 1px solid #b3b3b3;
@@ -239,6 +239,7 @@ form.search input {
     float: left;
     font-size: 1.3em;
     border-radius: 0;
+    -webkit-appearance:none;
 }
 
 form.search input[type=search] {
@@ -311,7 +312,7 @@ form.search input[type=submit]:active {
 
 .results form.search {
     margin-top: 8em;
-    
+    margin-bottom: 3em;
 }
 
 .results #results {
@@ -418,7 +419,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
     #container {
         width: 52em;
-        margin: 3em auto 0;
+        margin: 3em auto 1em;
         padding: 1em 3em;
     }
 
