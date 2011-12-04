@@ -41,9 +41,11 @@ def results(request):
                 print author.name
                 for x in author.articles.all():
                     print x.title
-                
+
         titles = [x['title'] for x in googleScholar]
-    
+
+        calcISIForUnratedAuthors()
+
         resultset = get_authors_and_articles_from_db(titles)
         #resultset = get_fake_results(query)
 
@@ -55,7 +57,7 @@ def results(request):
 
 def calcISIForUnratedAuthors():
     for author in get_unrated_authors():
-        author.isi_score = IsiHandler.clalcISIScore(author.name, author.articles.all)
+        author.isi_score = IsiHandler.calcISIScore(author.name, author.articles.values_list('title', flat=True))
         author.save()
 
 def get_authors_and_articles_from_db(titles):
@@ -74,7 +76,7 @@ def get_unrated_authors():
     """
     Get all the authors that have no ISI-Score yet
     """
-    return Author.objects.filter(isi_score==None)
+    return Author.objects.filter(isi_score=None)
 
 
 def index(request):
