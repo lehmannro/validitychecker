@@ -126,6 +126,15 @@ class IsiHandler():
             erg.append(ergdic)
         return erg
 
+    def getNArticles(self):
+        try:
+            #print tostring(self.page)
+            n = self.page.get_element_by_id("trueFinalResultCount").text
+            return int(n)
+        except Exception:
+            return 0
+        
+
     def getISIScore(self):
         return len(self.ISIData)
 
@@ -150,8 +159,8 @@ def calcISIScoreWithArticles(authorname, titles):
 
 def calcISIScore(authorname):
     """get number of articles on isi"""
-    hscore = IsiHandler(convertScholarNameToISIName(authorname),"","http://apps.webofknowledge.com/summary.do", False).getHScore()
-    return hscore
+    #hscore = IsiHandler(convertScholarNameToISIName(authorname),"","http://apps.webofknowledge.com/summary.do", False).getHScore()
+    return IsiHandler(authorname).getNArticles()
 
 def refreshArticles(article):
     """fetch number of cites for articles and add missing information (like source, datatype...)"""
@@ -166,5 +175,5 @@ def convertScholarNameToISIName(name):
     return ' '.join(name.split(' ')[::-1])
 
 if __name__ == '__main__':
-    print calcISIScore('D Cass',['Do sunspots matter?'])
+    print IsiHandler('Cass D').getNArticles()
 
