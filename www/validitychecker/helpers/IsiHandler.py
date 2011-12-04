@@ -77,7 +77,7 @@ class IsiHandler():
         response = self.opener.open(req)
 		
     def createPostQuery(self):
-        postdata = standardPostData
+        postdata = standardPostData.copy()
         postdata['value(input1)'] = self.title
         postdata['value(input2)'] = self.author
         data = urllib.urlencode(postdata)
@@ -133,8 +133,8 @@ def calcISIScore(authorname, titles):
     try:
         correctTitles = [title.rstrip(".?!") for title in titles]
         return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
-    except:
-        print "well, that didn't work <(','<) <(',')> (>',')>"
+    except Exception, e:
+        print "well, that didn't work <(','<) <(',')> (>',')>", e
         return 0
 
 def convertScholarNameToISIName(name):
