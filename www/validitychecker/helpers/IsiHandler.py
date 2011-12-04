@@ -71,7 +71,6 @@ class IsiHandler():
         if parse:
             self.page=self.getPage(self.createPostQuery())
             self.ISIData = self.parsePage()
-            print self.ISIData
 
     def firstConnect(self):
         req = urllib2.Request(self.url)
@@ -130,6 +129,12 @@ class IsiHandler():
     def getISIScore(self):
         return len(self.ISIData)
 
+    def getISIData(self):
+        if len(self.ISIData) > 0:
+            return self.ISIData[0]
+        else:
+            return {'author':'', 'title':'', 'source':'', 'timescited': 0}
+
     def getHScore(self):
         #print self.getPage(self.createPostQuery())
         #print "HSCORE", self.page
@@ -151,7 +156,9 @@ def calcISIScore(authorname):
 def refreshArticles(article):
     """fetch number of cites for articles and add missing information (like source, datatype...)"""
     #TODO implement
-    article.times_cited_on_isi = 2;
+    isidata = IsiHandler('',article.title).getISIData()
+    article.source = isidata['source']
+    article.times_cited_on_isi = isidata['timescited']
     article.save()
 
 def convertScholarNameToISIName(name):
