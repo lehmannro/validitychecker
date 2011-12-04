@@ -307,6 +307,12 @@ form.search input[type=submit]:active {
     text-decoration: none;
 }
 
+.actions {
+    display: none;
+}
+ul#results li:hover .actions {
+    display: inline;
+}
 ul#results, ul.articles {
     list-style-type: none;
 }
@@ -398,8 +404,12 @@ ul#results, ul.articles {
         min-width: 20em;
     }
 
-    h2.author-name, .author-meta {
+    h2.author-name {
         display: inline;
+    }
+    .author-meta {
+        display: inline;
+        margin-left: 6px;
     }
 
 }
