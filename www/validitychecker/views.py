@@ -95,7 +95,7 @@ def get_authors_and_articles_from_db(titles):
         tmp = (author, Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date'))
         #calculate score
         print("score", tmp[0].isi_cites, tmp[0].isi_score)
-        tmp[0].score = int(math.log(tmp[0].isi_cites) + 2*tmp[0].isi_score)
+        tmp[0].score = int(math.log(tmp[0].isi_cites+1) + 2*tmp[0].isi_score)
         ret.append(tmp)
     ret = sorted(ret, key=lambda elem: -elem[0].score)
     return ret
