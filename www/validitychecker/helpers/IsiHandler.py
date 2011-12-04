@@ -129,7 +129,7 @@ class IsiHandler():
     def getISIScore(self):
         return len(self.ISIData)
 
-def calcISIScore(authorname, titles):
+def calcISIScoreWithArticles(authorname, titles):
     try:
         correctTitles = [title.rstrip(".?!") for title in titles]
         return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
@@ -141,10 +141,11 @@ def calcISIScore(authorname):
     """get number of articles on isi"""
     pass
 
-def refreshArticles(artilces):
+def refreshArticles(article):
     """fetch number of cites for articles and add missing information (like source, datatype...)"""
     #TODO implement
-    pass
+    article.times_cited_on_isi = 2;
+    article.save()
 
 def convertScholarNameToISIName(name):
     return ' '.join(name.split(' ')[::-1])

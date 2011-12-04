@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.db.models import F
+from django.db.models import F, Sum
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -50,33 +50,28 @@ def results(request):
                 
         titles = [x['title'] for x in googleScholar]
 
-        #5ecalculate isi score
-        recalculateIsiScore(newArticles)
-    
+        #calculate isi cites for new articles
+        calculateIsiCites(newArticles)
+
+        calcISIForUnratedAuthors()
+
         resultset = get_authors_and_articles_from_db(titles)
         #resultset = get_fake_results(query)
 
-        return render_to_resp)nse('results.html',
+        return render_to_response('results.html',
                                   context_instance=RequestContext(request, dict(
                                   target=reverse(results), results=resultset, query=query)))
     else:
         return # 300 /index
 
-def recalculateIsiScore(newArticles):
+def calculateIsiCites(newArticles):
     #fetch data for new articles
     for article in newArticles:
         IsiHandler.refreshArticles(article)
 
-    #set isi score for authors
-    authors = Author.objects.filter(articles__in=newArticles).annotate(isi_cites=sum(articles__times_cited_on_isi))
-    for author in authors:
-        #recalculate score, number of papers is more important than number of cites
-        author.isi_score = F('isi_cites') + 2 * IsiHandler.calcISIScore(author.name)
-    authors.save()
-
 def calcISIForUnratedAuthors():
     for author in get_unrated_authors():
-        author.isi_score = IsiHandler.clalcISIScore(author.name, author.articles.all)
+        author.isi_score = IsiHandler.calcISIScoreWithArticles(author.name,author.articles.all())
         author.save()
 
 def get_authors_and_articles_from_db(titles):
@@ -84,8 +79,22 @@ def get_authors_and_articles_from_db(titles):
     returns the matching articles and authors from the db that are credible
     param: title a list of strings    
     """
-    authors = Author.objects.filter(isi_score__gt=0).filter(articles__title__in=titles).distinct()[:10]
-    ret = [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name).order_by('-publish_date')) for author in authors]
+
+    #set isi score for authors
+    #authors = Author.objects.filter(articles__in=newArticles).annotate(isi_cites=sum(articles__times_cited_on_isi))
+    #for author in authors:
+        #recalculate score, number of papers is more important than number of cites
+    #    author.isi_score = F('isi_cites') + 2 * IsiHandler.calcISIScore(author.name)
+    #authors.save()
+
+    ret = []
+    authors = Author.objects.filter(isi_score__gt=-1, articles__title__in=titles).annotate(isi_cites=Sum('articles__times_cited_on_isi')).distinct()[:10]
+    for author in authors:
+        tmp = (author, Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date'))
+        #calculate score
+        tmp[0].score = tmp[0].isi_cites + 10*tmp[0].isi_score
+        ret.append(tmp)
+    #ret = [(author,Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date')) for author in authors]
     #ret = Article.objects.filter(title__in=titles).values('author')
     #ret = Author.objects.filter(articles__title__in=titles).
     #print ret
@@ -95,7 +104,7 @@ def get_unrated_authors():
     """
     Get all the authors that have no ISI-Score yet
     """
-    return Author.objects.filter(isi_score==None)
+    return Author.objects.filter(isi_score=None)
 
 
 def index(request):
