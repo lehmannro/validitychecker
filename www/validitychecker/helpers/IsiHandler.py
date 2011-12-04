@@ -62,15 +62,16 @@ class IsiHandler():
 
     """class holding all the data needed for a Query to the ISI-Database"""
 
-    def __init__(self, author='', title=''):
+    def __init__(self, author='', title='', url='http://apps.webofknowledge.com/WOS_GeneralSearch.do', parse=True):
         self.opener = urllib2.build_opener(urllib2.HTTPRedirectHandler(), urllib2.HTTPCookieProcessor())
         self.title=title
         self.author=author
-        self.url='http://apps.webofknowledge.com/WOS_GeneralSearch.do'
+        self.url=url
         self.firstConnect()
-        self.page=self.getPage(self.createPostQuery())
-        self.ISIData = self.parsePage()
-        print self.ISIData
+        if parse:
+            self.page=self.getPage(self.createPostQuery())
+            self.ISIData = self.parsePage()
+            print self.ISIData
 
     def firstConnect(self):
         req = urllib2.Request(self.url)
@@ -110,7 +111,7 @@ class IsiHandler():
             text = tostring(self.page.get_element_by_id('RECORD_%s'% str(i)))
             text = self.replaceAllHighlites(text)
             text = regexSuite['extrachars'].sub('',text)
-            print text
+            #print text
             author = regexSuite['author'].search(text)
             if author != None:
                 ergdic['author']=author.group(1)
@@ -129,7 +130,12 @@ class IsiHandler():
     def getISIScore(self):
         return len(self.ISIData)
 
-def calcISIScore(authorname, titles):
+    def getHScore(self):
+        #print self.getPage(self.createPostQuery())
+        #print "HSCORE", self.page
+        return 1888
+
+def calcISIScoreWithArticles(authorname, titles):
     try:
         correctTitles = [title.rstrip(".?!") for title in titles]
         return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
@@ -137,7 +143,19 @@ def calcISIScore(authorname, titles):
         print "well, that didn't work <(','<) <(',')> (>',')>", e
         return 0
 
+def calcISIScore(authorname):
+    """get number of articles on isi"""
+    hscore = IsiHandler(convertScholarNameToISIName(authorname),"","http://apps.webofknowledge.com/summary.do", False).getHScore()
+    return hscore
+
+def refreshArticles(article):
+    """fetch number of cites for articles and add missing information (like source, datatype...)"""
+    #TODO implement
+    article.times_cited_on_isi = 2;
+    article.save()
+
 def convertScholarNameToISIName(name):
+    print('Name', ' '.join(name.split(' ')[::-1]))
     return ' '.join(name.split(' ')[::-1])
 
 if __name__ == '__main__':

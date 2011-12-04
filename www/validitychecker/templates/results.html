@@ -22,7 +22,7 @@
         <div class="author-info">
             <h2 class="author-name"><a href="{{ target }}?q={{ author.url }}">{{ author.name }}</a></h2>
             <p class="author-meta">
-            {% blocktrans with score=author.isi_score %}Goggles Score: {{ score }}{% endblocktrans %}
+            {% blocktrans with score=author.score %}Goggles Score: {{ score }}{% endblocktrans %}
             &bull;
             {% blocktrans with count=author.articles.count %}{{ count }} articles published{% endblocktrans %}
             <span class="actions">

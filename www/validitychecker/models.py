@@ -3,7 +3,7 @@ from django.db import models
 class Author(models.Model):
     articles = models.ManyToManyField('Article', verbose_name="list of articles")
     name = models.CharField(max_length=60, verbose_name="name of the author")
-    isi_score= models.IntegerField('ISI score', null=True)
+    isi_score= models.IntegerField('ISI h-score', null=True)
 
     def __unicode__(self):
         return self.name
@@ -18,12 +18,16 @@ class Article(models.Model):
 
     url = models.CharField(max_length=255)
 
+    #is cites this is one, if one citation this is 2 ...
     times_cited_on_isi = models.IntegerField(null=True)
 
     last_updated = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return u'%s' % self.title
+
+    def __str__(self):
+        return self.title
 
 class Language(models.Model):
     code = models.CharField(max_length=4)
