@@ -388,10 +388,20 @@ ul#results, ul.articles {
     letter-spacing: 0.02em;
 }
 
-.results li ul,
-.results li li {
+.results li ul{
     margin: 0;
     padding: 0;
+}
+
+.results li li {
+    margin: 0.5em 0 1em;
+    padding: 0;
+}
+
+.results li li h3 {
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0 0 0.25em;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
