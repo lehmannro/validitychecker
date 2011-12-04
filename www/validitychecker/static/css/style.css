@@ -283,7 +283,8 @@ form.search input[type=submit]:active {
     display: none;
 }
 
-.home .sell h2 {
+.home .sell h2,
+.statistics h2 {
     font-family: ArvoBold, Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 2em;
@@ -323,11 +324,13 @@ ul#results, ul.articles {
     list-style-type: none;
 }
 
-.results h1 {
+.results h1,
+.statistics h1 {
     float: left;
 }
 
-.results form.search {
+.results form.search,
+.statistics form.search {
     margin-top: 8em;
     margin-bottom: 3em;
 }
@@ -400,6 +403,19 @@ ul#results, ul.articles {
     font-size: 1em;
     font-weight: normal;
     margin: 0 0 0.25em;
+}
+
+#statistics {
+    background: #fff;
+    border-color: rgba(179, 179, 179, .88);
+    border-radius: 8px;
+    padding: 1em 2em 1em;
+    margin-right: 12px;
+}
+
+#chart_div {
+    width: 100%;
+    overflow: hidden;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
