@@ -130,8 +130,12 @@ class IsiHandler():
         return len(self.ISIData)
 
 def calcISIScore(authorname, titles):
-    correctTitles = [title.rstrip(".?!") for title in titles]
-    return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
+    try:
+        correctTitles = [title.rstrip(".?!") for title in titles]
+        return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
+    except:
+        print "well, that didn't work <(','<) <(',')> (>',')>"
+        return 0
 
 def convertScholarNameToISIName(name):
     return ' '.join(name.split(' ')[::-1])
