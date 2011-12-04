@@ -159,8 +159,12 @@ def calcISIScoreWithArticles(authorname, titles):
 
 def calcISIScore(authorname):
     """get number of articles on isi"""
-    #hscore = IsiHandler(convertScholarNameToISIName(authorname),"","http://apps.webofknowledge.com/summary.do", False).getHScore()
-    return IsiHandler(authorname).getNArticles()
+    try:
+        #hscore = IsiHandler(convertScholarNameToISIName(authorname),"","http://apps.webofknowledge.com/summary.do", False).getHScore()
+        return IsiHandler(authorname).getNArticles()
+    except Exception, e:
+        print "well, that didn't work <(','<) <(',')> (>',')>", e
+        return 0
 
 def refreshArticles(article):
     """fetch number of cites for articles and add missing information (like source, datatype...)"""

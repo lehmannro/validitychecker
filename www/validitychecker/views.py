@@ -75,7 +75,7 @@ def calculateIsiCites(newArticles):
 
 def calcISIForUnratedAuthors():
     for author in get_unrated_authors():
-        author.isi_score = IsiHandler.calcISIScoreWithArticles(author.name,author.articles.values_list('title', flat=True))
+        author.isi_score = IsiHandler.calcISIScore(author.name)#,author.articles.values_list('title', flat=True))
         author.save()
 
 def get_unrated_authors():
@@ -90,7 +90,7 @@ def get_authors_and_articles_from_db(titles):
     param: title a list of strings    
     """
     ret = []
-    authors = Author.objects.filter(isi_score__gt=0, articles__title__in=titles).annotate(isi_cites=Sum('articles__times_cited_on_isi')).distinct()[:8]
+    authors = Author.objects.filter(isi_score__gt=0, articles__title__in=titles).annotate(isi_cites=Sum('articles__times_cited_on_isi')).distinct()[:6]
     for author in authors:
         tmp = (author, Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date'))
         #calculate score
