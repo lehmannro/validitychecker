@@ -45,9 +45,10 @@ def results(request):
             for authorName in entry['authors']:
                 author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
                 author.articles.add(article)
-                print author.name
-                for x in author.articles.all():
-                    print x.title
+                author.save()
+                #print author.name
+                #for x in author.articles.all():
+                #    print x.title
 
         titles = [x['title'] for x in googleScholar]
 

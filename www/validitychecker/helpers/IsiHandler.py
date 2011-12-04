@@ -164,7 +164,7 @@ def refreshArticles(article):
         print "well, that didn't work <(','<) <(',')> (>',')>", e
 
 def convertScholarNameToISIName(name):
-    print('Name', ' '.join(name.split(' ')[::-1]))
+    #print('Name', ' '.join(name.split(' ')[::-1]))
     return ' '.join(name.split(' ')[::-1])
 
 if __name__ == '__main__':
