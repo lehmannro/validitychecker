@@ -74,7 +74,7 @@ def calculateIsiCites(newArticles):
 
 def calcISIForUnratedAuthors():
     for author in get_unrated_authors():
-        author.isi_score = IsiHandler.calcISIScore(author.name, author.articles.values_list('title', flat=True))
+        author.isi_score = IsiHandler.calcISIScoreWithArticles(author.name,author.articles.values_list('title', flat=True))
         author.save()
 
 def get_unrated_authors():
