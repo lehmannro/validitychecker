@@ -16,13 +16,13 @@
 </form>
 
 <div class="clearfix"></div>
-<ul id="results">
+<ol id="results">
     {% for author, articles in results %}
     <li>
         <div class="author-info">
             <h2 class="author-name">{{ author.name }}</h2>
             <p class="author-meta">
-            {% blocktrans with score=author.isi_score %}ISI Score: {{ score }}{% endblocktrans %}
+            {% blocktrans with score=author.isi_score %}Goggles Score: {{ score }}{% endblocktrans %}
             &bull;
             {% blocktrans with count=author.articles.count %}{{ count }} articles published{% endblocktrans %}</p>
         </div>
@@ -34,7 +34,7 @@
         </ul>
     </li>
     {% endfor %}
-</ul>
+</ol>
 </div>
 
 {% endblock %}
