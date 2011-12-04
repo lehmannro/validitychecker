@@ -22,6 +22,7 @@
         <ul class="articles">
             {% for article in articles %}
             <li><a href="{{ article.url }}">{{ article.title }} &bull; {{ article.publish_date|date:_("M Y") }}</a></li>
+            <div class="snippet">{{ article.abstract }}</div>
             {% endfor %}
         </ul>
     </li>

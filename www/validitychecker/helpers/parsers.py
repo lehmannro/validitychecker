@@ -44,7 +44,7 @@ def google_scholar_parser (query):
         while elem.find("font").find("span") != None:
             elem.find("font").find("span").drop_tree()
         #print elem.find("font").text.strip('.')
-        res['abstract'] = elem.find("font").text.strip('. ')
+        res['abstract'] = elem.find("font").text
         #print res['cited']
         results.append(res)
     return results

@@ -34,7 +34,7 @@ def results(request):
                     'publish_date':entry['publish_date'],
                     'title':entry['title'], 
                     'data_type':articleType,
-                    #'abstract':entry['abstract']
+                    'abstract':entry['abstract']
                 })
             for authorName in entry['authors']:
                 author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
