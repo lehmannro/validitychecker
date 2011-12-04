@@ -11,7 +11,7 @@ class Author(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     abstract = models.TextField(blank=True)
-    publish_date = models.DateField('date published')
+    publish_date = models.DateField('date published', null=True)
     source = models.CharField(max_length=2048, blank=True)
     language = models.ForeignKey('Language', null=True)
     data_type = models.ForeignKey('Datatype', null=True)
