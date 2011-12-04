@@ -77,7 +77,7 @@ class IsiHandler():
 		response = self.opener.open(req)
 		
 	def createPostQuery(self):
-		postdata = standardPostData
+		postdata = standardPostData.copy()
 		postdata['value(input1)'] = self.title
 		postdata['value(input2)'] = self.author
 		data = urllib.urlencode(postdata)
