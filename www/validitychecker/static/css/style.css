@@ -307,7 +307,9 @@ form.search input[type=submit]:active {
     text-decoration: none;
 }
 
-
+ul#results, ul.articles {
+    list-style-type: none;
+}
 
 
 
