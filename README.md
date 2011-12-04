@@ -34,13 +34,45 @@ Just in case you have no idea how to get going here are the required commands fo
 ## Challenges
 * Sorting and ranking scientific papers is hard
 * Scientific papers are written in technical language
+* Few resources provide proper APIs
 
 ## Solution
-
-## Technical architecture
+* User enters search query
+* Lookup on Google Scholar
+* Match the authors against ISI
+* Compute a score for the authors
+* Find easy-to-read resources of the author
 
 ## User expierience
+* The user experience is designed to be simple
+
+* Seamless browser integration with Greasemonkey script
+* Available in English and German
+* Adaptive Design for smaller screen sizes
 
 ## Remaining issues
+* Register for the ISI Web of Knowledge API and implement the hooks
+* Digestible article summaries 
 
 ## Team
+
+### Backend
+* [Robert Lehmann](https://github.com/lehmannro/)
+* [Dominik Moritz](https://github.com/domoritz/)
+* [André Rieck](https://github.com/Varek/)
+* [Thomas Werkmeister](https://github.com/lesnail/)
+
+### Frontend
+* [David Owens](https://github.com/fineartdavid/)
+* [Norman Rzepka](https://github.com/normanrz/)
+
+### Design
+* [Milena Glim](https://github.com/milenskaya/)
+
+## Stuff we used
+* [Google Scholar](http://scholar.google.com/)
+* [ISI Web Knowledge](http://apps.isiknowledge.com/)
+* [Arvo Font](http://www.fontsquirrel.com/fonts/arvo)
+
+
+
