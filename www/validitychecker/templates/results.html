@@ -8,6 +8,7 @@
   <input name="q" value="{{ query }}"/>
   <input type="submit" value="{% trans "Search" %}" />
 </form>
+<div class="clearfix"></div>
 <ul id="results">
     {% for author, articles in results %}
     <li>

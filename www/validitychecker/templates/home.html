@@ -21,11 +21,13 @@
         </fieldset>
     </form>
 
-    <h2>{% trans "Popular searches" %}</h2>
-    <ul class="popular">
-        {% for query in popular_queries %}
-        <li value="{{ query.number}}"><a href="{{ target }}?q={{ query.url }}">{{ query.query }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="popular">
+        <h2>{% trans "Popular searches" %}</h2>
+        <ul>
+            {% for query in popular_queries %}
+            <li value="{{ query.number}}"><a href="{{ target }}?q={{ query.url }}">{{ query.query }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

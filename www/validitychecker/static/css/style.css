@@ -48,8 +48,8 @@ img { border: 0; -ms-interpolation-mode: bicubic; }
  * Also: hot pink!
  */
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: #0071bc; color: #fff; text-shadow: none; }
+::selection { background: #0071bc; color: #fff; text-shadow: none; }
 
 
 /* =============================================================================
@@ -188,6 +188,7 @@ table { border-collapse: collapse; border-spacing: 0; }
    ========================================================================== */
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     background: url(../images/background.jpg) fixed top center no-repeat;
     background-size: 100% auto;
 }
@@ -198,9 +199,6 @@ body {
     }
 }
 
-
-
-
 #container {
     margin: 3em 1em;
     background: #dfdfdf;
@@ -208,12 +206,9 @@ body {
     border: 1px solid #b3b3b3;
     border-color: rgba(179, 179, 179, .83);
     border-radius: 8px;
-    padding: 1em;
+    padding: 2em;
 }
 
-h1 {
-    margin: 0;
-}
 h1 a {
     display: block;
     text-indent: -999em; 
@@ -229,8 +224,9 @@ h1 a {
     background: url(../images/logo.png) no-repeat;
 }
 
-.home .sell, .home form {
-    margin: 1em;
+
+.home .content {
+    margin: 0;
 }
 
 .home .sell {
@@ -242,7 +238,7 @@ h1 a {
 }
 
 .home .sell h2 {
-    font-family: ChunkFiveRegular;
+    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 2em;
 }
@@ -251,21 +247,21 @@ h1 a {
     margin-top: 4em;
 }
 
-.home form input {
+form input {
     border: 1px solid #000;
     padding: .5em;
     float: left;
     font-size: 1.3em;
     border-radius: 0;
 }
-.home form input:focus {
-    box-shadow: 0px 0px 6px #4D90FE;
+form input[type=search]:focus {
+    box-shadow: 0px 0px 6px #0071bc;
 }
 
-.home form input[type=search] {
+form input[type=search] {
     background: #fff;
 }
-.home form input[type=submit] {
+form input[type=submit] {
     background: #b3b3b3 url(../images/search.png) center no-repeat;
     background-size: 50%;
     display: block;
@@ -276,35 +272,35 @@ h1 a {
     width: 2.8em;
     border-left: none;
 }
+form input[type=submit]:hover, 
+form input[type=submit]:active {
+    background-color: #0071bc;
+}
 
 #container > footer {
     margin: 5em 0 0;
     text-align: center;
 }
 
-.mask {
-    display: none; 
-    width: 100%;
-    height: 100%; 
-    z-index: 9000; 
-    padding: 0px; 
-    margin: 0px; 
-    background: rgba(0,0,0,0.2); 
-    position: fixed; 
-    top: 0px; 
-    overflow: hidden;
+.home .popular {
+    margin-top: 4em;
+}
+.home .popular h2 {
+    color: #888;
 }
 
-.home .popular {
-    text-align: center;
+.home .popular ul {
+    list-style: none;
+    padding-left: 0;
 }
 
 .home .popular li a {
     display: inline-block;
-    margin: 2px 6px !important;
-    padding-bottom: 2px !important;
-    text-decoration: none !important;
+    margin: .2em .6em .2em 0;
+    text-decoration: none;
 }
+
+
 
 
 
@@ -346,22 +342,22 @@ h1 a {
 
 @media only screen and (max-width: 480px) {
 
-.home form {
-    position: relative;
-    height: 3em;
-}
-.home form input[type=search] {
-    position: absolute;
-    left: 0;
-    right: 50px;
-    top: 0;
-}
-.home form input[type=submit] {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50px;
-}
+    .home form {
+        position: relative;
+        height: 3em;
+    }
+    .home form input[type=search] {
+        position: absolute;
+        left: 0;
+        right: 50px;
+        top: 0;
+    }
+    .home form input[type=submit] {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50px;
+    }
 
 }
 
@@ -369,37 +365,37 @@ h1 a {
 @media only screen and (min-width: 480px) {
   /* Style adjustments for viewports 480px and over go here */
 
-.home .sell p {
-    display: block;
-}
+    .home .sell p {
+        display: block;
+    }
 
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 800px) {
   /* Style adjustments for viewports 768px and over go here */
 
-#container {
-    width: 54em;
-    margin: 3em auto;
-    padding: 3em;
-}
+    #container {
+        width: 54em;
+        margin: 3em auto;
+        padding: 3em;
+    }
 
-.home .sell, .home form {
-    margin: 3em 6em 2em 7.5em;
-}
+    .home .content {
+        margin: 3em 6em 2em 7.5em;
+    }
 
-.home form input[type=search] {
-    width: 27em;
-}
+    .home form input[type=search] {
+        width: 27em;
+    }
 
 }
 
 @media only screen and (min-width: 950px) {
-  /* Style adjustments for viewports 480px and over go here */
+  /* Style adjustments for viewports 950px and over go here */
  
- body {
-     font-size: 16px;
- }
+    body {
+        font-size: 16px;
+    }
 
 }
 
