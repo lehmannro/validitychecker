@@ -341,7 +341,7 @@ ul#results, ul.articles {
 }
 #results > li {
     position:relative; /* Create a positioning context */
-    margin:0 0 3em 0; /* Give each list item a left margin to make room for the numbers */
+    margin:0 0 3em 4em; /* Give each list item a left margin to make room for the numbers */
     padding: 0; /* Add some spacing around the content */
     list-style:none; /* Disable the normal item numbering */
 }
@@ -351,10 +351,10 @@ ul#results, ul.articles {
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing: border-box;
-    width: 1.5em;
+    width: 1.65em;
     float: left;
     margin-right: 0.2em;
-    padding: 0.3em 0 0.1em;
+    padding: 0.3em 0 0.2em;
     color: #fff;
     background: #222222;
     font-weight:normal;
@@ -383,7 +383,9 @@ ul#results, ul.articles {
 }
 
 .results li h2 + p {
-    margin: -0.3em 0 -0.5em;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 .results li ul{
@@ -473,8 +475,6 @@ input[type="search"]::-webkit-search-cancel-button {
     }
    
 }
-
-
 
 @media only screen and (min-width: 480px) {
   /* Style adjustments for viewports 480px and over go here */
