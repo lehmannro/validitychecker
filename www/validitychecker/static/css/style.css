@@ -333,6 +333,10 @@ form.search input[type=submit]:active {
     transition: background-color 0.25s;
 }
 
+.home .popular li a:focus {
+    color: #20578f !important;
+}
+
 .actions {
     display: none;
 }
