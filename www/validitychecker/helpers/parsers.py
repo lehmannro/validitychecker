@@ -34,7 +34,7 @@ def google_scholar_parser (query):
             res['publish_date'] = None
         res['url'] = elem.find_class('gs_rt')[0].find("h3/a").attrib['href']
         #print elem.find("font").find_class('gs_fl')[0].find("a").text
-        if elem.find("font").find_class('gs_fl')[0].find("a").text.startswith('Cited by'):
+        if elem.find("font").find_class('gs_fl') and elem.find("font").find_class('gs_fl')[0].find("a").text.startswith('Cited by'):
             res['cited'] = int(elem.find("font").find_class('gs_fl')[0].find("a").text.split(' by ')[1])
         else:
             res['cited'] = 0
