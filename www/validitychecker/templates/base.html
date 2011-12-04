@@ -1,5 +1,5 @@
 {% extends 'boilerplate.html' %}
-
+{% load i18n %}
 
 {% comment %}
 {% block css %}{% include_media 'base.css' %}{% endblock %}
@@ -19,8 +19,8 @@
 
 {% block footer %}
 <footer>
-<p><a href="http://www.rhok.org/solutions/climate-goggles">Solution</a> for <a href="http://www.rhok.org/event/berlin-germany">Random Hacks of Kindness Berlin 2011</a> | <a href="/statistics">Statistics</a></p>
-<p>Built in Berlin</p>
+<p><a href="http://www.rhok.org/solutions/climate-goggles">{% trans "Solution" %}</a> for <a href="http://www.rhok.org/event/berlin-germany">Random Hacks of Kindness Berlin 2011</a> | <a href="/statistics">{% trans "Statistics" %}</a></p>
+<p>{% trans "Built in Berlin" %}</p>
 </footer>
 {% endblock %}
 
