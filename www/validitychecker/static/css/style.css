@@ -243,7 +243,7 @@ form.search input {
 
 form.search input[type=search] {
     background: #fff;
-    box-shadow: inset 0 0 3px rgba(0,0,0,.7);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.7);
 }
 form.search input[type=search]:focus {
     box-shadow: 0px 0px 6px #0071bc;
@@ -265,7 +265,7 @@ form.search input[type=submit]:active {
 }
 
 
-.home .content {
+.content {
     margin: 0;
 }
 
@@ -312,7 +312,7 @@ form.search input[type=submit]:active {
 }
 
 .results form.search {
-    margin: 3em 150px;
+    margin-top: 8em;
     
 }
 
@@ -367,6 +367,12 @@ ol ol li:last-child {margin-bottom:0;}
 
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+
+
 /* =============================================================================
    Non-semantic helper classes
    Please define your styles before this section.
@@ -405,17 +411,17 @@ ol ol li:last-child {margin-bottom:0;}
 
 @media only screen and (max-width: 480px) {
 
-    .home form.search {
+    form.search {
         position: relative;
         height: 3em;
     }
-    .home form.search input[type=search] {
+    form.search input[type=search] {
         position: absolute;
         left: 0;
         right: 50px;
         top: 0;
     }
-    .home form.search input[type=submit] {
+    form.search input[type=submit] {
         position: absolute;
         right: 0;
         top: 0;
@@ -448,7 +454,7 @@ ol ol li:last-child {margin-bottom:0;}
 
 @media only screen and (min-width: 520px) {
 
-    .home form.search input[type=search] {
+    form.search input[type=search] {
         min-width: 20em;
     }
 
@@ -463,11 +469,11 @@ ol ol li:last-child {margin-bottom:0;}
         padding: 1em 3em;
     }
 
-    .home .content {
+    .content {
         margin: 3em 6em 2em 7.5em;
     }
 
-    .home form.search input[type=search] {
+    form.search input[type=search] {
         width: 25em;
     }
 
