@@ -279,7 +279,7 @@ form.search input[type=submit]:active {
 }
 
 .home .sell h2 {
-    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
+    font-family: ArvoBold, Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 2em;
 }
@@ -292,7 +292,7 @@ form.search input[type=submit]:active {
     margin-top: 4em;
 }
 .home .popular h2 {
-    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
+    font-family: ArvoBold, Arial, Helvetica, sans-serif;
     font-weight: normal;
     color: #888;
 }
@@ -360,7 +360,7 @@ ul#results, ul.articles {
     font-weight:normal;
     font-size: 1.8em;
     line-height: 1.1;
-    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
+    font-family: ArvoBold, Arial, Helvetica, sans-serif;
     text-align:center;
 }
 li ol,
@@ -368,7 +368,7 @@ li ul {margin-top:6px;}
 ol ol li:last-child {margin-bottom:0;}
 
 .results li h2 {
-    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
+    font-family: ArvoBold, Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 1.8em;
     line-height: 1.1;
