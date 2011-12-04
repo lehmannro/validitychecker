@@ -202,11 +202,16 @@ body {
 #container {
     margin: 1em;
     background: #dfdfdf;
-    background: rgba(255, 255, 255, .83);
+    background: rgba(255, 255, 255, .88);
     border: 1px solid #b3b3b3;
-    border-color: rgba(179, 179, 179, .83);
+    border-color: rgba(179, 179, 179, .88);
     border-radius: 8px;
     padding: 1em 2em 1em;
+}
+
+.results #container {
+    background: rgba(255, 255, 255, .93);
+    border-color: rgba(179, 179, 179, .93);
 }
 
 h1 a {
@@ -526,6 +531,23 @@ input[type="search"]::-webkit-search-cancel-button {
 
 }
 
+@media only screen and (min-width: 1400px) {
+  /* Style adjustments for viewports 950px and over go here */
+ 
+    body {
+        font-size: 16px;
+        background: url(../images/check.png),
+            url(../images/background.jpg) fixed top center no-repeat;
+        background-size: auto, 100% auto;
+    }
+
+}
+
+@media screen and (orientation:portrait) and (min-width: 1400px) {
+    body {
+        background-size: auto, auto 100%;
+    }
+}
 
 
 /* =============================================================================
