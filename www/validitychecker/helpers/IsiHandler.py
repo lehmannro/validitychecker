@@ -62,15 +62,16 @@ class IsiHandler():
 
     """class holding all the data needed for a Query to the ISI-Database"""
 
-    def __init__(self, author='', title=''):
+    def __init__(self, author='', title='', url='http://apps.webofknowledge.com/WOS_GeneralSearch.do', parse=True):
         self.opener = urllib2.build_opener(urllib2.HTTPRedirectHandler(), urllib2.HTTPCookieProcessor())
         self.title=title
         self.author=author
-        self.url='http://apps.webofknowledge.com/WOS_GeneralSearch.do'
+        self.url=url
         self.firstConnect()
-        self.page=self.getPage(self.createPostQuery())
-        self.ISIData = self.parsePage()
-        print self.ISIData
+        if parse:
+            self.page=self.getPage(self.createPostQuery())
+            self.ISIData = self.parsePage()
+            print self.ISIData
 
     def firstConnect(self):
         req = urllib2.Request(self.url)
@@ -129,6 +130,11 @@ class IsiHandler():
     def getISIScore(self):
         return len(self.ISIData)
 
+    def getHScore(self):
+        #print self.getPage(self.createPostQuery())
+        #print "HSCORE", self.page
+        return 1888
+
 def calcISIScoreWithArticles(authorname, titles):
     try:
         correctTitles = [title.rstrip(".?!") for title in titles]
@@ -139,7 +145,8 @@ def calcISIScoreWithArticles(authorname, titles):
 
 def calcISIScore(authorname):
     """get number of articles on isi"""
-    pass
+    hscore = IsiHandler(convertScholarNameToISIName(authorname),"","http://apps.webofknowledge.com/summary.do", False).getHScore()
+    return hscore
 
 def refreshArticles(article):
     """fetch number of cites for articles and add missing information (like source, datatype...)"""
@@ -148,6 +155,7 @@ def refreshArticles(article):
     article.save()
 
 def convertScholarNameToISIName(name):
+    print('Name', ' '.join(name.split(' ')[::-1]))
     return ' '.join(name.split(' ')[::-1])
 
 if __name__ == '__main__':

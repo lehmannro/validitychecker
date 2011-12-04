@@ -3,7 +3,7 @@ from django.db import models
 class Author(models.Model):
     articles = models.ManyToManyField('Article', verbose_name="list of articles")
     name = models.CharField(max_length=60, verbose_name="name of the author")
-    isi_score= models.IntegerField('ISI score', null=True)
+    isi_score= models.IntegerField('ISI h-score', null=True)
 
     def __unicode__(self):
         return self.name
