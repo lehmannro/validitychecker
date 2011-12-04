@@ -55,16 +55,16 @@ Just in case you have no idea how to get going here are the required commands fo
 * Digestible article summaries 
 
 ## Team
-* Backend
-** [Robert Lehmann](https://github.com/lehmannro/)
-** [Dominik Moritz](https://github.com/domoritz/)
-** [André Rieck](https://github.com/Varek/)
-** [Thomas Werkmeister](https://github.com/lesnail/)
-* Frontend
-** [David Owens](https://github.com/fineartdavid/)
-** [Norman Rzepka](https://github.com/normanrz/)
-* Design
-** [Milena Glim](https://github.com/milenskaya/)
+### Backend
+* [Robert Lehmann](https://github.com/lehmannro/)
+* [Dominik Moritz](https://github.com/domoritz/)
+* [André Rieck](https://github.com/Varek/)
+* [Thomas Werkmeister](https://github.com/lesnail/)
+### Frontend
+* [David Owens](https://github.com/fineartdavid/)
+* [Norman Rzepka](https://github.com/normanrz/)
+### Design
+* [Milena Glim](https://github.com/milenskaya/)
 
 ## Stuff we used
 * [Google Scholar](http://scholar.google.com/)
