@@ -305,7 +305,18 @@ form.search input[type=submit]:active {
     text-decoration: none;
 }
 
+.results h1 {
+    float: left;
+}
 
+.results form.search {
+    margin: 3em 150px;
+    
+}
+
+.results #results {
+    clear: left;
+}
 
 
 
