@@ -110,7 +110,7 @@ class IsiHandler():
             text = tostring(self.page.get_element_by_id('RECORD_%s'% str(i)))
             text = self.replaceAllHighlites(text)
             text = regexSuite['extrachars'].sub('',text)
-            print text
+            #print text
             author = regexSuite['author'].search(text)
             if author != None:
                 ergdic['author']=author.group(1)
@@ -133,8 +133,8 @@ def calcISIScoreWithArticles(authorname, titles):
     try:
         correctTitles = [title.rstrip(".?!") for title in titles]
         return sum([IsiHandler(convertScholarNameToISIName(authorname),title).getISIScore() for title in correctTitles])
-    except:
-        print "well, that didn't work <(','<) <(',')> (>',')>"
+    except Exception, e:
+        print "well, that didn't work <(','<) <(',')> (>',')>", e
         return 0
 
 def calcISIScore(authorname):

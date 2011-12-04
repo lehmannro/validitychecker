@@ -71,8 +71,15 @@ def calculateIsiCites(newArticles):
 
 def calcISIForUnratedAuthors():
     for author in get_unrated_authors():
-        author.isi_score = IsiHandler.calcISIScoreWithArticles(author.name,author.articles.all())
+        titles = [a.title for a in author.articles.all()]
+        author.isi_score = IsiHandler.calcISIScoreWithArticles(author.name, titles)
         author.save()
+
+def get_unrated_authors():
+    """
+    Get all the authors that have no ISI-Score yet
+    """
+    return Author.objects.filter(isi_score=None)
 
 def get_authors_and_articles_from_db(titles):
     """ 
@@ -88,24 +95,18 @@ def get_authors_and_articles_from_db(titles):
     #authors.save()
 
     ret = []
-    authors = Author.objects.filter(isi_score__gt=-1, articles__title__in=titles).annotate(isi_cites=Sum('articles__times_cited_on_isi')).distinct()[:10]
+    authors = Author.objects.filter(isi_score__gt=0, articles__title__in=titles).annotate(isi_cites=Sum('articles__times_cited_on_isi')).distinct()[:10]
     for author in authors:
         tmp = (author, Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date'))
         #calculate score
-        tmp[0].score = tmp[0].isi_cites + 10*tmp[0].isi_score
+        tmp[0].score = tmp[0].isi_cites + 2*tmp[0].isi_score
         ret.append(tmp)
     #ret = [(author,Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date')) for author in authors]
     #ret = Article.objects.filter(title__in=titles).values('author')
     #ret = Author.objects.filter(articles__title__in=titles).
     #print ret
+    ret = sorted(ret, key=lambda elem: -elem[0].score)
     return ret
-
-def get_unrated_authors():
-    """
-    Get all the authors that have no ISI-Score yet
-    """
-    return Author.objects.filter(isi_score=None)
-
 
 def index(request):
     popular_queries = list(Query.objects.order_by('-number')[:15])
