@@ -15,6 +15,13 @@
   
   Thomas Werkmeister: 
   Location: Potsdam
+
+  Robert Lehmann: Developer
+
+  Dominik Moritz: Developer
+  Site: http://domoritz.de
+  Twitter: doobly_doo
+  Location: Germany
   
   Milena Glim: Designer
   Twitter: Milenskaya
@@ -22,15 +29,13 @@
   
   Andre Rieck: Developer
   
-  Dominik Moritz: Developer
-
 /* THANKS */
   Names (& URL): RHoK (http://rhok.org/)
 
 /* SITE */
   Standards: HTML5, CSS3
   Components: Modernizr, jQuery, Django
-  Software: Python, Sqlite
+  Software: Python, Sqlite (or any other relational database)
   
   
 .-------.       ____    ,---.   .--. ______         ,-----.    ,---.    ,---.        .---.  .---.    ____        _______   .--.   .--.     .-'''-.             ,-----.     ________         .--.   .--. .-./`) ,---.   .--. ______     ,---.   .--.    .-''-.     .-'''-.    .-'''-.  
