@@ -137,6 +137,15 @@ def calcISIScore(authorname, titles):
         print "well, that didn't work <(','<) <(',')> (>',')>"
         return 0
 
+def calcISIScore(authorname):
+    """get number of articles on isi"""
+    pass
+
+def refreshArticles(artilces):
+    """fetch number of cites for articles and add missing information (like source, datatype...)"""
+    #TODO implement
+    pass
+
 def convertScholarNameToISIName(name):
     return ' '.join(name.split(' ')[::-1])
 

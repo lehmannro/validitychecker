@@ -18,6 +18,7 @@ class Article(models.Model):
 
     url = models.CharField(max_length=255)
 
+    #is cites this is one, if one citation this is 2 ...
     times_cited_on_isi = models.IntegerField(null=True)
 
     last_updated = models.DateTimeField(auto_now=True)

@@ -24,6 +24,8 @@ def results(request):
         #query google scholar
         googleScholar = parsers.google_scholar_parser(query)
 
+        newArticles = []
+
         #write to db
         articleType, created = Datatype.objects.get_or_create(name='article', defaults={'name':'article'})
         for entry in googleScholar:
@@ -36,6 +38,9 @@ def results(request):
                     'data_type':articleType,
                     'abstract':entry['abstract']
                 })
+            if created:
+                #prepare new articles that have to be 
+                newArticles.append(article)
             for authorName in entry['authors']:
                 author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
                 author.articles.add(article)
@@ -44,15 +49,30 @@ def results(request):
                     print x.title
                 
         titles = [x['title'] for x in googleScholar]
+
+        #5ecalculate isi score
+        recalculateIsiScore(newArticles)
     
         resultset = get_authors_and_articles_from_db(titles)
         #resultset = get_fake_results(query)
 
-        return render_to_response('results.html',
+        return render_to_resp)nse('results.html',
                                   context_instance=RequestContext(request, dict(
                                   target=reverse(results), results=resultset, query=query)))
     else:
         return # 300 /index
+
+def recalculateIsiScore(newArticles):
+    #fetch data for new articles
+    for article in newArticles:
+        IsiHandler.refreshArticles(article)
+
+    #set isi score for authors
+    authors = Author.objects.filter(articles__in=newArticles).annotate(isi_cites=sum(articles__times_cited_on_isi))
+    for author in authors:
+        #recalculate score, number of papers is more important than number of cites
+        author.isi_score = F('isi_cites') + 2 * IsiHandler.calcISIScore(author.name)
+    authors.save()
 
 def calcISIForUnratedAuthors():
     for author in get_unrated_authors():
@@ -61,10 +81,10 @@ def calcISIForUnratedAuthors():
 
 def get_authors_and_articles_from_db(titles):
     """ 
-    returns the matching articles and authors from the db 
+    returns the matching articles and authors from the db that are credible
     param: title a list of strings    
     """
-    authors = Author.objects.filter(articles__title__in=titles).distinct()[:10]
+    authors = Author.objects.filter(isi_score__gt=0).filter(articles__title__in=titles).distinct()[:10]
     ret = [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name).order_by('-publish_date')) for author in authors]
     #ret = Article.objects.filter(title__in=titles).values('author')
     #ret = Author.objects.filter(articles__title__in=titles).
