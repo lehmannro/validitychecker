@@ -266,6 +266,7 @@ form.search input[type=submit] {
     border-left: none;
 }
 form.search input[type=submit]:hover, 
+form.search input[type=submit]:focus,
 form.search input[type=submit]:active {
     background-color: #0071bc;
 }
@@ -311,7 +312,25 @@ form.search input[type=submit]:active {
 .home .popular li a {
     display: inline-block;
     margin: .2em .6em .2em 0;
+    padding: 2px 6px;
+    border-radius: 8px;
     text-decoration: none;
+    -moz-transition: background-color 0.75s;
+    -ms-transition: background-color 0.75s;
+    -o-transition: background-color 0.75s;
+    -webkit-transition: background-color 0.75s;
+    transition: background-color 0.75s;
+}
+
+.home .popular li a:hover,
+.home .popular li a:focus {
+    background: #fff;
+    outline: none;
+    -moz-transition: background-color 0.25s;
+    -ms-transition: background-color 0.25s;
+    -o-transition: background-color 0.25s;
+    -webkit-transition: background-color 0.25s;
+    transition: background-color 0.25s;
 }
 
 .actions {
