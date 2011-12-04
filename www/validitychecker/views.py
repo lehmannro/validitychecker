@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.db.models import F
+from django.db.models import F, Count, Sum
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -10,7 +10,7 @@ from datetime import date
 import urllib
 
 from validitychecker.models import Query, Article, Author, Language, Datatype
-from validitychecker.helpers import parsers, IsiHandler
+from validitychecker.helpers import parsers, IsiHandler, gviz_api
 
 def results(request):
     if 'q' in request.GET:
@@ -24,6 +24,8 @@ def results(request):
         #query google scholar
         googleScholar = parsers.google_scholar_parser(query)
 
+        newArticles = []
+
         #write to db
         articleType, created = Datatype.objects.get_or_create(name='article', defaults={'name':'article'})
         for entry in googleScholar:
@@ -36,6 +38,9 @@ def results(request):
                     'data_type':articleType,
                     'abstract':entry['abstract']
                 })
+            if created:
+                #prepare new articles that have to be 
+                newArticles.append(article)
             for authorName in entry['authors']:
                 author, created = Author.objects.get_or_create(name=authorName, defaults={'name':authorName})
                 author.articles.add(article)
@@ -44,6 +49,9 @@ def results(request):
                     print x.title
 
         titles = [x['title'] for x in googleScholar]
+
+        #calculate isi cites for new articles
+        calculateIsiCites(newArticles)
 
         calcISIForUnratedAuthors()
 
@@ -59,21 +67,47 @@ def results(request):
     else:
         return # 300 /index
 
+def calculateIsiCites(newArticles):
+    #fetch data for new articles
+    for article in newArticles:
+        IsiHandler.refreshArticles(article)
+
 def calcISIForUnratedAuthors():
     for author in get_unrated_authors():
         author.isi_score = IsiHandler.calcISIScore(author.name, author.articles.values_list('title', flat=True))
         author.save()
 
+def get_unrated_authors():
+    """
+    Get all the authors that have no ISI-Score yet
+    """
+    return Author.objects.filter(isi_score=None)
+
 def get_authors_and_articles_from_db(titles):
     """ 
-    returns the matching articles and authors from the db 
+    returns the matching articles and authors from the db that are credible
     param: title a list of strings    
     """
-    authors = Author.objects.filter(articles__title__in=titles).distinct()[:10]
-    ret = [(author,Article.objects.filter(title__in=titles).filter(author__name=author.name).order_by('-publish_date')) for author in authors]
+
+    #set isi score for authors
+    #authors = Author.objects.filter(articles__in=newArticles).annotate(isi_cites=sum(articles__times_cited_on_isi))
+    #for author in authors:
+        #recalculate score, number of papers is more important than number of cites
+    #    author.isi_score = F('isi_cites') + 2 * IsiHandler.calcISIScore(author.name)
+    #authors.save()
+
+    ret = []
+    authors = Author.objects.filter(isi_score__gt=0, articles__title__in=titles).annotate(isi_cites=Sum('articles__times_cited_on_isi')).distinct()[:10]
+    for author in authors:
+        tmp = (author, Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date'))
+        #calculate score
+        tmp[0].score = tmp[0].isi_cites + 2*tmp[0].isi_score
+        ret.append(tmp)
+    #ret = [(author,Article.objects.filter(title__in=titles, author__name=author.name).order_by('-publish_date')) for author in authors]
     #ret = Article.objects.filter(title__in=titles).values('author')
     #ret = Author.objects.filter(articles__title__in=titles).
     #print ret
+    ret = sorted(ret, key=lambda elem: -elem[0].score)
     return ret
 
 def get_unrated_authors():
@@ -95,15 +129,22 @@ def index(request):
                               context_instance=RequestContext(request, dict(
                               target=reverse(results))))
 
+def statistics(request):
+    description = {"publications": ("number", "Publications"),
+                 "cg_score": ("number", "Climate Goggles Score"),
+                 "isi_score": ("number", "Isi Score")}
+    data = [{'isi_score': author.isi_score, 'publications': author.publications} for author  in Author.objects.annotate(publications=Count('articles'))]
+    scatter_data_table = gviz_api.DataTable(description)
+    scatter_data_table.LoadData(data)
+    json = scatter_data_table.ToJSCode("data",columns_order=("publications", "cg_score", "isi_score"))
+
+    return render_to_response('statistics.html',
+                              {'scatter': json },
+                              context_instance=RequestContext(request, dict(target=reverse(results))))
+
 @csrf_exempt
 def get_score(request):
     title = request.POST.get('title')
     author = request.POST.get('author')
     import random
     return HttpResponse(str(random.randrange(100)), mimetype="text/plain")
-    score = 0
-    try:
-        score = Author.objects.get(name=author).isi_score or 0
-    except Author.DoesNotExist:
-        pass
-    return HttpResponse(str(score), mimetype="text/plain")

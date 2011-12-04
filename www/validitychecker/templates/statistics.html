@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block extra_js %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        {{ scatter|safe }}
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+        chart.draw(data, {width: 600, height: 400,
+                          title: 'Publications vs. Score',
+                          hAxis: {title: 'Publications', minValue: 0},
+                          vAxis: {title: 'Score', minValue: 0},
+                          legend: 'none'
+                         });
+      }
+    </script>
+{% endblock %}
+{% block body_classes %}class="statistics"{% endblock %}
+
+{% block content %}
+<div class="content">
+<form class="search" method="get" action="{{ target }}">
+    <fieldset>
+        <label for="q">
+            <span class="visuallyhidden">{% trans "Climate science theory" %}</span>
+            <input id="q" name="q" required autofocus placeholder="{% trans "Check a theory" %}" type="search" />
+        </label>
+        <input type="submit" value="{% trans "Search" %}" />
+    </fieldset>
+</form>
+
+<div class="clearfix"></div>
+    <h2>Statistics</h2>
+    <div id="statistics">
+        <div id="chart_div"></div>
+    </div>
+</div>
+{% endblock %}

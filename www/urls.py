@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', 'www.validitychecker.views.index', name='home'),
     url(r'^search/?$', 'www.validitychecker.views.results'),
     url(r'^score/?$', 'www.validitychecker.views.get_score'),
+     url(r'^statistics/?$', 'www.validitychecker.views.statistics'),
     # url(r'^www/', include('www.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
