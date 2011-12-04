@@ -200,7 +200,7 @@ body {
 }
 
 #container {
-    margin: 3em 1em 0;
+    margin: 1em;
     background: #dfdfdf;
     background: rgba(255, 255, 255, .83);
     border: 1px solid #b3b3b3;
@@ -239,6 +239,7 @@ form.search input {
     float: left;
     font-size: 1.3em;
     border-radius: 0;
+    -webkit-appearance:none;
 }
 
 form.search input[type=search] {
@@ -291,6 +292,8 @@ form.search input[type=submit]:active {
     margin-top: 4em;
 }
 .home .popular h2 {
+    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
+    font-weight: normal;
     color: #888;
 }
 
@@ -321,11 +324,78 @@ ul#results, ul.articles {
 
 .results form.search {
     margin-top: 8em;
-    
+    margin-bottom: 3em;
 }
 
 .results #results {
     clear: left;
+}
+
+#results {
+    counter-reset:li; /* Initiate a counter */
+    margin-left:0; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */
+}
+#results > li {
+    position:relative; /* Create a positioning context */
+    margin:0 0 0 3em; /* Give each list item a left margin to make room for the numbers */
+    padding: 0; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+}
+#results > li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-3em;
+    left: -3em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing: border-box;
+    width: 2em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right: 8px;
+    padding: 4px;
+    color: #fff;
+    background: #222222;
+    font-weight:normal;
+    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
+    text-align:center;
+}
+li ol,
+li ul {margin-top:6px;}
+ol ol li:last-child {margin-bottom:0;}
+
+.results li h2 {
+    font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 1.4em;
+    margin: 0;
+}
+
+.results li h2 + p {
+
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
 }
 
 
@@ -436,7 +506,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
     #container {
         width: 52em;
-        margin: 3em auto 0;
+        margin: 3em auto 1em;
         padding: 1em 3em;
     }
 
