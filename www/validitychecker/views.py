@@ -97,3 +97,9 @@ def get_score(request):
     author = request.POST.get('author')
     import random
     return HttpResponse(str(random.randrange(100)), mimetype="text/plain")
+    score = 0
+    try:
+        score = Author.objects.get(name=author).isi_score or 0
+    except Author.DoesNotExist:
+        pass
+    return HttpResponse(str(score), mimetype="text/plain")
