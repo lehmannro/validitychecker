@@ -308,6 +308,16 @@ form.search input[type=submit]:active {
     text-decoration: none;
 }
 
+.actions {
+    display: none;
+}
+ul#results li:hover .actions {
+    display: inline;
+}
+ul#results, ul.articles {
+    list-style-type: none;
+}
+
 .results h1 {
     float: left;
 }
@@ -479,6 +489,14 @@ input[type="search"]::-webkit-search-cancel-button {
 
     form.search input[type=search] {
         min-width: 20em;
+    }
+
+    h2.author-name {
+        display: inline;
+    }
+    .author-meta {
+        display: inline;
+        margin-left: 6px;
     }
 
 }

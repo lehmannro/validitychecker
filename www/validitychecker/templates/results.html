@@ -24,7 +24,12 @@
             <p class="author-meta">
             {% blocktrans with score=author.isi_score %}Goggles Score: {{ score }}{% endblocktrans %}
             &bull;
-            {% blocktrans with count=author.articles.count %}{{ count }} articles published{% endblocktrans %}</p>
+            {% blocktrans with count=author.articles.count %}{{ count }} articles published{% endblocktrans %}
+            <span class="actions">
+            &bull;
+            <a href="http://google.com/search?q={{ author.name|urlencode }}">{% blocktrans %}Search{% endblocktrans %}</a>
+            </span>
+            </p>
         </div>
         <ul class="articles">
             {% for article in articles %}
