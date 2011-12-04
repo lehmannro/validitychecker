@@ -341,24 +341,19 @@ ul#results, ul.articles {
 }
 #results > li {
     position:relative; /* Create a positioning context */
-    margin:0 0 3em 4em; /* Give each list item a left margin to make room for the numbers */
+    margin:0 0 3em 0; /* Give each list item a left margin to make room for the numbers */
     padding: 0; /* Add some spacing around the content */
     list-style:none; /* Disable the normal item numbering */
 }
 #results > li:before {
     content:counter(li); /* Use the counter as content */
     counter-increment:li; /* Increment the counter by 1 */
-    /* Position and style the number */
-    position:absolute;
-    top:-0.275em;
-    left: -2.2em;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing: border-box;
     width: 1.5em;
-    /* Some space between the number and the content in browsers that support
-       generated content but not positioning it (Camino 2 is one example) */
-    margin-right: 8px;
+    float: left;
+    margin-right: 0.2em;
     padding: 0.3em 0 0.1em;
     color: #fff;
     background: #222222;
@@ -388,9 +383,7 @@ ul#results, ul.articles {
 }
 
 .results li h2 + p {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    margin: -0.3em 0 -0.5em;
 }
 
 .results li ul{
@@ -489,6 +482,26 @@ input[type="search"]::-webkit-search-cancel-button {
     .home .sell p {
         display: block;
     }
+
+#results > li {
+    margin:0 0 3em 4em; /* Give each list item a left margin to make room for the numbers */
+}
+
+#results > li:before {
+    /* Position and style the number */
+    position:absolute;
+    top:-0.275em;
+    left: -2.2em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right: 8px;
+}
+
+.results li h2 + p {
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
 
 }
 
