@@ -155,11 +155,13 @@ def calcISIScore(authorname):
 
 def refreshArticles(article):
     """fetch number of cites for articles and add missing information (like source, datatype...)"""
-    #TODO implement
-    isidata = IsiHandler('',article.title).getISIData()
-    article.source = isidata['source']
-    article.times_cited_on_isi = isidata['timescited']
-    article.save()
+    try:
+        isidata = IsiHandler('',article.title).getISIData()
+        article.source = isidata['source']
+        article.times_cited_on_isi = isidata['timescited']
+        article.save()
+    except Exception, e:
+        print "well, that didn't work <(','<) <(',')> (>',')>", e
 
 def convertScholarNameToISIName(name):
     print('Name', ' '.join(name.split(' ')[::-1]))
