@@ -327,18 +327,16 @@ ul#results, ul.articles {
     margin-bottom: 3em;
 }
 
-.results #results {
-    clear: left;
-}
-
 #results {
+    clear: left;
+    margin-top: 3em;
     counter-reset:li; /* Initiate a counter */
     margin-left:0; /* Remove the default left margin */
     padding-left:0; /* Remove the default left padding */
 }
 #results > li {
     position:relative; /* Create a positioning context */
-    margin:0 0 0 3em; /* Give each list item a left margin to make room for the numbers */
+    margin:0 0 0 4em; /* Give each list item a left margin to make room for the numbers */
     padding: 0; /* Add some spacing around the content */
     list-style:none; /* Disable the normal item numbering */
 }
@@ -347,19 +345,21 @@ ul#results, ul.articles {
     counter-increment:li; /* Increment the counter by 1 */
     /* Position and style the number */
     position:absolute;
-    top:-3em;
-    left: -3em;
+    top:-0.275em;
+    left: -2.2em;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing: border-box;
-    width: 2em;
+    width: 1.5em;
     /* Some space between the number and the content in browsers that support
        generated content but not positioning it (Camino 2 is one example) */
     margin-right: 8px;
-    padding: 4px;
+    padding: 0.3em 0 0.1em;
     color: #fff;
     background: #222222;
     font-weight:normal;
+    font-size: 1.8em;
+    line-height: 1.1;
     font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
     text-align:center;
 }
@@ -370,12 +370,15 @@ ol ol li:last-child {margin-bottom:0;}
 .results li h2 {
     font-family: ChunkFiveRegular, Arial, Helvetica, sans-serif;
     font-weight: normal;
-    font-size: 1.4em;
+    font-size: 1.8em;
+    line-height: 1.1;
     margin: 0;
 }
 
 .results li h2 + p {
-
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
