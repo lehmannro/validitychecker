@@ -15,6 +15,10 @@
   
   Thomas Werkmeister: 
   Location: Potsdam
+  
+  Milena Glim: Designer
+  Twitter: Milenskaya
+  Location: Berlin
 
 /* THANKS */
   Names (& URL): RHoK (http://rhok.org/)

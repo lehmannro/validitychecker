@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-03 12:47-0600\n"
+"POT-Creation-Date: 2011-12-04 05:54-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Norman Rzepka <code@normanrzepka.de>\n"
-"Language-Team: LANGUAGE <de@li.org>\n"
+"Language-Team: German (Deutsch) <de@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,40 +19,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: validitychecker/templates/home.html:9
-msgid ""
-"With so many people talking about climate change it can be hard to separate "
-"fact from fiction."
-msgstr "So viele Leute reden über den Klimawandel, sodass es manchmal schwer ist herauszufinden was wirklich stimmt und was erfunden ist."
+msgid "Protect your brain from climate fiction."
+msgstr "Schütze dich vor Klimamythen."
 
 #: validitychecker/templates/home.html:10
 msgid ""
+"With so many people talking about climate change it can be hard to separate "
+"fact from fiction."
+msgstr ""
+"So viele Leute reden über den Klimawandel, sodass es manchmal schwer ist "
+"herauszufinden was wirklich stimmt und was erfunden ist."
+
+#: validitychecker/templates/home.html:11
+msgid ""
 "Climate Goggles help you to find the truth from the world's most respected "
 "scientists."
-msgstr "Climate Goggles hilft dir die Wahrheit von den weltweit renommiertesten Wissenschaftlern zu erfahren."
-
-#: validitychecker/templates/home.html:15
-msgid "Check a theory"
-msgstr "Überprüfe eine Theorie"
+msgstr ""
+"Climate Goggles hilft dir die Wahrheit von den weltweit renommiertesten "
+"Wissenschaftlern zu erfahren."
 
 #: validitychecker/templates/home.html:17
+#: validitychecker/templates/results.html:11
 msgid "Climate science theory"
 msgstr "Klimaforschungstheorie"
 
+#: validitychecker/templates/home.html:18
+#, fuzzy
+msgid "Enter a theory"
+msgstr "Gib eine Theorie ein"
+
 #: validitychecker/templates/home.html:20
-#: validitychecker/templates/results.html:9
+#: validitychecker/templates/results.html:14
+#: validitychecker/templates/results.html:30
 msgid "Search"
 msgstr "Suchen"
 
-#: validitychecker/templates/home.html:24
+#: validitychecker/templates/home.html:25
 msgid "Popular searches"
-msgstr "Häufigste Fragen"
+msgstr "Beliebte Fragen"
 
-#: validitychecker/templates/results.html:17
-#, python-format
-msgid "ISI Score: %(score)s"
-msgstr "ISI Skala: %(score)s"
+#: validitychecker/templates/results.html:12
+msgid "Check a theory"
+msgstr "Überprüfe eine Theorie"
 
-#: validitychecker/templates/results.html:19
+#: validitychecker/templates/results.html:25
+#, fuzzy, python-format
+msgid "Goggles Score: %(score)s"
+msgstr "Goggles Score: %(score)s"
+
+#: validitychecker/templates/results.html:27
 #, python-format
 msgid "%(count)s articles published"
 msgstr "%(count)s Artikel veröffentlicht"
+
+#: validitychecker/templates/results.html:36
+msgid "M Y"
+msgstr "M Y"

@@ -48,6 +48,9 @@ def results(request):
         calcISIForUnratedAuthors()
 
         resultset = get_authors_and_articles_from_db(titles)
+        
+        for author, articles in resultset:
+            author.url = urllib.quote_plus(author.name)
         #resultset = get_fake_results(query)
 
         return render_to_response('results.html',
