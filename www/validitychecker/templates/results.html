@@ -4,12 +4,12 @@
 {% block body_classes %}class="results"{% endblock %}
 
 {% block content %}
-
+<div class="content">
 <form class="search" method="get" action="{{ target }}">
     <fieldset>
         <label for="q">
             <span class="visuallyhidden">{% trans "Climate science theory" %}</span>
-            <input id="q" name="q" required autofocus placeholder="{% trans "Check a theory" %}" type="search" />
+            <input id="q" name="q" required placeholder="{% trans "Check a theory" %}" value="{{ query }}" type="search" />
         </label>
         <input type="submit" value="{% trans "Search" %}" />
     </fieldset>
@@ -40,5 +40,6 @@
     </li>
     {% endfor %}
 </ul>
+</div>
 
 {% endblock %}

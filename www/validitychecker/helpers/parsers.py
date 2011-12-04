@@ -7,7 +7,7 @@ def google_scholar_parser (query):
     opener = urllib2.build_opener(urllib2.HTTPHandler(debuglevel=0))
     opener.addheaders = [('User-agent', 'Mozilla/5.0')]
     search_path = "http://scholar.google.com/scholar?hl=en&as_sdt=1%2C5&num=10&q=" + urllib.quote_plus(query) + "&as_sdt=0%2C5&as_ylo=&as_vis=1"
-    print search_path
+    #print search_path
     response = opener.open(search_path)
     results = []
     doc = fromstring(response.read())
@@ -29,7 +29,9 @@ def google_scholar_parser (query):
             try:
                 res['publish_date'] = date(int(elem.find_class('gs_a')[0].text.split(' - ')[1].split(',')[-1].split('/')[-1]),1,1)
             except ValueError:
-                pass
+                res['publish_date'] = None
+        else: 
+            res['publish_date'] = None
         res['url'] = elem.find_class('gs_rt')[0].find("h3/a").attrib['href']
         #print elem.find("font").find_class('gs_fl')[0].find("a").text
         if elem.find("font").find_class('gs_fl')[0].find("a").text.startswith('Cited by'):
