@@ -19,6 +19,8 @@ def google_scholar_parser (query):
         while elem.find_class('gs_rt')[0].find("h3/a/b") != None:
             elem.find_class('gs_rt')[0].find("h3/a/b").drop_tag()
         #print elem.find_class('gs_a')[0].text
+        if not elem.find_class('gs_a'):
+            continue
         while elem.find_class('gs_a')[0].find("b") != None:
             elem.find_class('gs_a')[0].find("b").drop_tag()
         #print elem.find_class('gs_a')[0].text
