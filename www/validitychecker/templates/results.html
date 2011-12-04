@@ -4,10 +4,17 @@
 {% block body_classes %}class="results"{% endblock %}
 
 {% block content %}
-<form method="get" action="{{ target }}">
-  <input name="q" value="{{ query }}"/>
-  <input type="submit" value="{% trans "Search" %}" />
+
+<form class="search" method="get" action="{{ target }}">
+    <fieldset>
+        <label for="q">
+            <span class="visuallyhidden">{% trans "Climate science theory" %}</span>
+            <input id="q" name="q" required autofocus placeholder="{% trans "Check a theory" %}" type="search" />
+        </label>
+        <input type="submit" value="{% trans "Search" %}" />
+    </fieldset>
 </form>
+
 <div class="clearfix"></div>
 <ul id="results">
     {% for author, articles in results %}
